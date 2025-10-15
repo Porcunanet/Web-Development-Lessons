@@ -1,0 +1,2369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introduction to HTML - Complete Lesson by Patrick Porcuna</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.7;
+            color: #1a202c;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px 0;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 80px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: pulse 15s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        header h1 {
+            font-size: 4em;
+            margin-bottom: 15px;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+            position: relative;
+            z-index: 1;
+        }
+        
+        header .subtitle {
+            font-size: 1.5em;
+            opacity: 0.95;
+            margin-top: 10px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        nav {
+            background: #2d3748;
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        nav li {
+            margin: 0;
+        }
+        
+        nav a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 18px 24px;
+            font-weight: 600;
+            transition: all 0.3s;
+            border-bottom: 3px solid transparent;
+        }
+        
+        nav a:hover, nav a.active {
+            background: #667eea;
+            border-bottom-color: #fbbf24;
+        }
+        
+        main {
+            padding: 60px 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        section {
+            margin-bottom: 80px;
+            scroll-margin-top: 80px;
+        }
+        
+        section:last-child {
+            margin-bottom: 40px;
+        }
+        
+        h2 {
+            color: #667eea;
+            font-size: 2.8em;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 4px solid #667eea;
+            position: relative;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 100px;
+            height: 4px;
+            background: #fbbf24;
+        }
+        
+        h3 {
+            color: #764ba2;
+            font-size: 2em;
+            margin: 35px 0 20px;
+        }
+        
+        h4 {
+            color: #2d3748;
+            font-size: 1.4em;
+            margin: 25px 0 15px;
+        }
+        
+        p {
+            margin: 15px 0;
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+        
+        ul, ol {
+            margin: 20px 0;
+            padding-left: 40px;
+        }
+        
+        li {
+            margin: 12px 0;
+            font-size: 1.05em;
+            line-height: 1.7;
+        }
+        
+        .hero-box {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            padding: 40px;
+            border-radius: 12px;
+            border-left: 6px solid #667eea;
+            margin: 30px 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+        
+        .info-box {
+            background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+            border-left: 6px solid #0891b2;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .warning-box {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border-left: 6px solid #f59e0b;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .success-box {
+            background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+            border-left: 6px solid #10b981;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .danger-box {
+            background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+            border-left: 6px solid #ef4444;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        pre {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 25px;
+            border-radius: 10px;
+            overflow-x: auto;
+            margin: 25px 0;
+            border: 3px solid #475569;
+            position: relative;
+            font-size: 0.95em;
+            line-height: 1.6;
+        }
+        
+        code {
+            font-family: 'Courier New', 'Monaco', 'Consolas', monospace;
+        }
+        
+        .inline-code {
+            background: #f1f5f9;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            color: #e11d48;
+            font-size: 0.95em;
+            border: 1px solid #e2e8f0;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        th, td {
+            padding: 18px;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.9em;
+            letter-spacing: 0.5px;
+        }
+        
+        tr:nth-child(even) {
+            background: #f8fafc;
+        }
+        
+        tr:hover {
+            background: #e0e7ff;
+            transition: background 0.3s;
+        }
+        
+        td {
+            font-size: 1em;
+        }
+        
+        .timeline {
+            border-left: 5px solid #667eea;
+            padding-left: 40px;
+            margin: 40px 0;
+        }
+        
+        .timeline-item {
+            margin-bottom: 40px;
+            position: relative;
+            padding: 20px;
+            background: #f8fafc;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        
+        .timeline-item::before {
+            content: '';
+            width: 24px;
+            height: 24px;
+            background: #667eea;
+            border-radius: 50%;
+            position: absolute;
+            left: -52px;
+            top: 20px;
+            border: 5px solid white;
+            box-shadow: 0 0 0 3px #667eea;
+        }
+        
+        .timeline-item h4 {
+            color: #667eea;
+            font-size: 1.5em;
+            margin-bottom: 12px;
+            margin-top: 0;
+        }
+        
+        .activity-card {
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 12px;
+            margin: 40px 0;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .activity-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%);
+        }
+        
+        .activity-card h3 {
+            color: white;
+            margin-top: 0;
+            font-size: 2em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            position: relative;
+        }
+        
+        .activity-card p, .activity-card ul, .activity-card h4 {
+            position: relative;
+        }
+        
+        .activity-card h4 {
+            color: white;
+            margin-top: 25px;
+        }
+        
+        .activity-card.purple {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .activity-card.green {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        }
+        
+        .tag-example {
+            display: inline-block;
+            background: #f1f5f9;
+            padding: 8px 16px;
+            margin: 6px 4px;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            font-weight: 700;
+            color: #e11d48;
+            border: 2px solid #e2e8f0;
+            font-size: 0.95em;
+        }
+        
+        .comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin: 30px 0;
+        }
+        
+        .comparison-item {
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .comparison-good {
+            background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+            border: 3px solid #10b981;
+        }
+        
+        .comparison-bad {
+            background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+            border: 3px solid #ef4444;
+        }
+        
+        .comparison-item h4 {
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-size: 1.3em;
+        }
+        
+        .comparison-good h4 {
+            color: #059669;
+        }
+        
+        .comparison-bad h4 {
+            color: #dc2626;
+        }
+        
+        footer {
+            background: #1e293b;
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+        }
+        
+        footer h3 {
+            color: white;
+            margin-bottom: 25px;
+        }
+        
+        footer a {
+            color: #93c5fd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        footer a:hover {
+            color: #60a5fa;
+            text-decoration: underline;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 35px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 700;
+            transition: all 0.3s;
+            margin: 12px 8px;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 0.95em;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.5);
+        }
+        
+        .copy-btn {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85em;
+            font-weight: 600;
+            transition: all 0.3s;
+            z-index: 10;
+        }
+        
+        .copy-btn:hover {
+            background: #764ba2;
+            transform: scale(1.05);
+        }
+        
+        .icon {
+            font-size: 1.3em;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+        
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin: 30px 0;
+        }
+        
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border-top: 4px solid #667eea;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+        
+        .card h4 {
+            color: #667eea;
+            margin-top: 0;
+        }
+        
+        @media (max-width: 1024px) {
+            .grid-3 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 0;
+            }
+            
+            header h1 {
+                font-size: 2.5em;
+            }
+            
+            header {
+                padding: 50px 20px;
+            }
+            
+            nav ul {
+                flex-direction: column;
+            }
+            
+            nav a {
+                border-bottom: 1px solid #4a5568;
+                border-left: 3px solid transparent;
+            }
+            
+            nav a:hover, nav a.active {
+                border-left-color: #fbbf24;
+            }
+            
+            main {
+                padding: 40px 20px;
+            }
+            
+            h2 {
+                font-size: 2em;
+            }
+            
+            h3 {
+                font-size: 1.6em;
+            }
+            
+            .comparison, .grid-3 {
+                grid-template-columns: 1fr;
+            }
+            
+            section {
+                margin-bottom: 50px;
+            }
+            
+            .container {
+                border-radius: 0;
+            }
+        }
+        
+        .highlight-yellow {
+            background: #fef3c7;
+            padding: 2px 6px;
+            border-radius: 3px;
+        }
+        
+        .highlight-green {
+            background: #d1fae5;
+            padding: 2px 6px;
+            border-radius: 3px;
+        }
+        
+        .highlight-blue {
+            background: #dbeafe;
+            padding: 2px 6px;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🌐 INTRODUCTION TO HTML</h1>
+            <p class="subtitle">by Patrick Porcuna</p>
+            <p class="subtitle" style="font-size: 1.2em; margin-top: 20px;">Web Development Fundamentals Course</p>
+        </header>
+        
+        <nav>
+            <ul>
+                <li><a href="#objectives">📚 Objectives</a></li>
+                <li><a href="#what-is-html">💡 What is HTML</a></li>
+                <li><a href="#history">📅 History</a></li>
+                <li><a href="#syntax">🔧 Syntax</a></li>
+                <li><a href="#elements">🏗️ Elements</a></li>
+                <li><a href="#semantic">🏛️ Semantic HTML</a></li>
+                <li><a href="#best-practices">✅ Best Practices</a></li>
+                <li><a href="#activities">🎯 Activities</a></li>
+                <li><a href="#resources">📖 Resources</a></li>
+            </ul>
+        </nav>
+        
+        <main>
+            <!-- OBJECTIVES SECTION -->
+            <section id="objectives">
+                <h2>📚 Learning Objectives</h2>
+                <div class="hero-box">
+                    <h3 style="margin-top: 0; color: #667eea;">By the end of this lesson, you will be able to:</h3>
+                    <ul style="font-size: 1.15em; line-height: 2;">
+                        <li>✅ Understand the structure of an HTML Document</li>
+                        <li>✅ Create a basic web page using HTML</li>
+                        <li>✅ Use common HTML elements such as headings, paragraphs, links, images, and lists</li>
+                        <li>✅ Structure content using semantic HTML tags</li>
+                        <li>✅ Apply best practices for writing clean, accessible HTML code</li>
+                        <li>✅ Create your first "About Me" HTML Page</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <!-- WHAT IS HTML SECTION -->
+            <section id="what-is-html">
+                <h2>🤔 What is HTML?</h2>
+                
+                <div class="info-box">
+                    <h3 style="margin-top: 0; color: #0891b2;">HTML = HyperText Markup Language</h3>
+                    <p style="font-size: 1.15em;"><strong>HTML is like the skeleton of a website</strong>, giving it structure and form. It sets up everything you see online, from text and images to forms and buttons.</p>
+                    <p style="font-size: 1.1em; margin-top: 20px;">Without HTML, websites would just be plain text without any organization or structure.</p>
+                </div>
+                
+                <h3>🎨 HTML vs CSS vs JavaScript</h3>
+                <p>These three technologies work together to create modern websites:</p>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Technology</th>
+                            <th>Purpose</th>
+                            <th>Metaphor</th>
+                            <th>Example</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>HTML</strong></td>
+                            <td>Structure &amp; Content</td>
+                            <td>🏗️ The skeleton/frame of a house</td>
+                            <td>Headings, paragraphs, images, links</td>
+                        </tr>
+                        <tr>
+                            <td><strong>CSS</strong></td>
+                            <td>Style &amp; Design</td>
+                            <td>🎨 Paint, decoration, furniture</td>
+                            <td>Colors, fonts, layouts, animations</td>
+                        </tr>
+                        <tr>
+                            <td><strong>JavaScript</strong></td>
+                            <td>Interactivity &amp; Behavior</td>
+                            <td>⚡ Electricity, plumbing, smart features</td>
+                            <td>Button clicks, form validation, animations</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="success-box">
+                    <h4>💡 Remember:</h4>
+                    <p><strong>HTML</strong> defines <span class="highlight-blue">WHAT</span> content appears on the page.</p>
+                    <p><strong>CSS</strong> defines <span class="highlight-yellow">HOW</span> that content looks.</p>
+                    <p><strong>JavaScript</strong> defines <span class="highlight-green">HOW</span> that content behaves.</p>
+                </div>
+            </section>
+            
+            <!-- HISTORY SECTION -->
+            <section id="history">
+                <h2>🌐 The Birth and Evolution of HTML</h2>
+                
+                <div class="info-box">
+                    <h3 style="margin-top: 0; color: #0891b2;">🧑‍💻 Sir Tim Berners-Lee at CERN (1989)</h3>
+                    <p style="font-size: 1.1em;"><strong>HTML was invented in 1989 by Sir Tim Berners-Lee at CERN</strong> to facilitate information sharing across computers. The first web page, created in 1991, was a simple text document with hyperlinks that laid the foundation for the internet as we know it today.</p>
+                    <p style="margin-top: 15px;"><strong>The Problem:</strong> Scientists at CERN needed a way to share research documents across different computer systems.</p>
+                    <p><strong>The Solution:</strong> HTML - A simple markup language that could link documents together using hyperlinks.</p>
+                </div>
+                
+                <h3>📅 HTML Evolution Timeline</h3>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <h4>HTML 1.0 (1993)</h4>
+                        <p><strong>The Foundation:</strong> Laid the groundwork with basic elements like headings, paragraphs, lists, and hyperlinks. It was simple but revolutionary, allowing documents to be interconnected across the internet.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>HTML 2.0 (1995)</h4>
+                        <p><strong>Getting Visual:</strong> Introduced tables for data organization and the ability to embed images directly into web pages, making content more structured and visually appealing.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>HTML 3.2 &amp; 4.01 (1997-1999)</h4>
+                        <p><strong>Major Expansion:</strong> Brought frames for page layouts, style sheets (CSS), JavaScript support for interactivity, and multimedia capabilities. HTML 4.01 became the standard for over a decade.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>HTML5 (2014) 🎉</h4>
+                        <p><strong>The Game-Changer:</strong> Introduced semantic elements (<code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;article&gt;</code>), native video and audio support, canvas for graphics, improved form controls, and better accessibility features.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>HTML5.1, 5.2, 5.3 &amp; Beyond (2016+)</h4>
+                        <p><strong>Continuous Improvement:</strong> Focus on performance optimization, security enhancements, better mobile support, and features for modern progressive web applications. HTML is now a "living standard" that evolves continuously.</p>
+                    </div>
+                </div>
+                
+                <h3>🚀 The Future of HTML</h3>
+                <div class="grid-3">
+                    <div class="card">
+                        <h4>📱 Mobile-First Design</h4>
+                        <p>Responsive websites that adapt seamlessly to smartphones, tablets, and desktops with better touch support and mobile optimizations.</p>
+                    </div>
+                    <div class="card">
+                        <h4>🥽 VR & AR Integration</h4>
+                        <p>WebXR APIs enabling immersive virtual and augmented reality experiences directly in browsers without plugins.</p>
+                    </div>
+                    <div class="card">
+                        <h4>♿ Enhanced Accessibility</h4>
+                        <p>Improved ARIA attributes and semantic elements ensuring websites work for all users, including those with disabilities.</p>
+                    </div>
+                    <div class="card">
+                        <h4>🌐 IoT Integration</h4>
+                        <p>HTML interfaces for controlling smart home devices, wearables, and connected appliances through web technologies.</p>
+                    </div>
+                    <div class="card">
+                        <h4>⚡ Performance Focus</h4>
+                        <p>Faster loading times, better resource management, and improved rendering for smoother user experiences.</p>
+                    </div>
+                    <div class="card">
+                        <h4>🔒 Security &amp; Privacy</h4>
+                        <p>Enhanced security features, better privacy controls, and safer methods for handling user data.</p>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- SYNTAX SECTION -->
+            <section id="syntax">
+                <h2>🔧 HTML Syntax: Elements, Tags, &amp; Comments</h2>
+                
+                <h3>📖 What is HTML Syntax?</h3>
+                <p>HTML syntax defines the <strong>correct way to write HTML code</strong> so that web browsers can understand and display it properly. Understanding syntax is essential for creating valid, functional HTML documents.</p>
+                
+                <div class="info-box">
+                    <h4>Key Components of HTML Syntax:</h4>
+                    <ul style="font-size: 1.05em; line-height: 1.9;">
+                        <li><strong>Tags:</strong> Markers that define where elements begin and end</li>
+                        <li><strong>Elements:</strong> Complete units consisting of tags and content</li>
+                        <li><strong>Attributes:</strong> Additional information about elements</li>
+                        <li><strong>Values:</strong> Data assigned to attributes</li>
+                        <li><strong>Comments:</strong> Notes in code that browsers ignore</li>
+                    </ul>
+                </div>
+                
+                <h3>📄 DOCTYPE Declaration</h3>
+                <p>The DOCTYPE declaration tells the browser which version of HTML you're using. It must be the <strong>very first line</strong> of every HTML document.</p>
+                
+                <pre><code>&lt;!DOCTYPE html&gt;</code></pre>
+                
+                <div class="warning-box">
+                    <p><strong>⚠️ Important:</strong> Always include the DOCTYPE declaration! Without it, browsers may render your page in "quirks mode," causing inconsistent behavior.</p>
+                </div>
+                
+                <h3>🏗️ Complete HTML Document Structure</h3>
+                <p>Every HTML page follows this basic structure:</p>
+                
+                <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;My First Webpage&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Hello, World!&lt;/h1&gt;
+    &lt;p&gt;This is my first webpage.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                
+                <h4>Breaking it down:</h4>
+                <ul style="font-size: 1.05em;">
+                    <li><span class="inline-code">&lt;!DOCTYPE html&gt;</span> - Declares HTML5</li>
+                    <li><span class="inline-code">&lt;html lang="en"&gt;</span> - Root element, specifies English language</li>
+                    <li><span class="inline-code">&lt;head&gt;</span> - Contains metadata (not visible on page)</li>
+                    <li><span class="inline-code">&lt;meta charset="UTF-8"&gt;</span> - Character encoding for proper text display</li>
+                    <li><span class="inline-code">&lt;meta name="viewport"...&gt;</span> - Makes page responsive on mobile devices</li>
+                    <li><span class="inline-code">&lt;title&gt;</span> - Text shown in browser tab</li>
+                    <li><span class="inline-code">&lt;body&gt;</span> - Contains all visible content</li>
+                </ul>
+                
+                <h3>🏷️ HTML Tags</h3>
+                <p>Tags define where elements begin and end. They are enclosed in angle brackets <span class="inline-code">&lt; &gt;</span>.</p>
+                
+                <div class="comparison">
+                    <div class="comparison-item comparison-good">
+                        <h4>✅ Opening Tag</h4>
+                        <pre><code>&lt;p&gt;</code></pre>
+                        <p>Marks the beginning of an element</p>
+                    </div>
+                    <div class="comparison-item comparison-good">
+                        <h4>✅ Closing Tag</h4>
+                        <pre><code>&lt;/p&gt;</code></pre>
+                        <p>Marks the end of an element (note the forward slash)</p>
+                    </div>
+                </div>
+                
+                <h4>Complete Element Example:</h4>
+                <pre><code>&lt;p&gt;This is a paragraph.&lt;/p&gt;
+
+&lt;h1&gt;This is a heading&lt;/h1&gt;
+
+&lt;a href="https://example.com"&gt;This is a link&lt;/a&gt;</code></pre>
+                
+                <h3>🔚 Self-Closing Tags</h3>
+                <p>Some elements don't contain content and therefore don't need a closing tag. These are called <strong>self-closing</strong> or <strong>void</strong> elements.</p>
+                
+                <div class="info-box">
+                    <h4>Common Self-Closing Tags:</h4>
+                    <div style="margin-top: 20px;">
+                        <span class="tag-example">&lt;img&gt;</span>
+                        <span class="tag-example">&lt;br&gt;</span>
+                        <span class="tag-example">&lt;hr&gt;</span>
+                        <span class="tag-example">&lt;input&gt;</span>
+                        <span class="tag-example">&lt;meta&gt;</span>
+                        <span class="tag-example">&lt;link&gt;</span>
+                    </div>
+                </div>
+                
+                <h4>Examples:</h4>
+                <pre><code>&lt;!-- Image --&gt;
+&lt;img src="photo.jpg" alt="A beautiful sunset"&gt;
+
+&lt;!-- Line Break --&gt;
+&lt;p&gt;First line&lt;br&gt;Second line&lt;/p&gt;
+
+&lt;!-- Horizontal Rule --&gt;
+&lt;hr&gt;
+
+&lt;!-- Form Input --&gt;
+&lt;input type="text" placeholder="Enter your name"&gt;</code></pre>
+                
+                <h3>📦 Block-Level vs Inline Elements</h3>
+                <p>HTML elements are categorized into two main types based on their display behavior:</p>
+                
+                <div class="comparison">
+                    <div class="comparison-item" style="background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%); border: 3px solid #3b82f6;">
+                        <h4 style="color: #1e40af;">📦 Block-Level Elements</h4>
+                        <p><strong>Characteristics:</strong></p>
+                        <ul>
+                            <li>Start on a new line</li>
+                            <li>Take up the full width available</li>
+                            <li>Can contain other block and inline elements</li>
+                            <li>Create "blocks" of content</li>
+                        </ul>
+                        <p style="margin-top: 15px;"><strong>Common Examples:</strong></p>
+                        <ul>
+                            <li><code>&lt;h1&gt;</code> to <code>&lt;h6&gt;</code> - Headings</li>
+                            <li><code>&lt;p&gt;</code> - Paragraphs</li>
+                            <li><code>&lt;div&gt;</code> - Generic container</li>
+                            <li><code>&lt;section&gt;</code> - Section</li>
+                            <li><code>&lt;ul&gt;</code>, <code>&lt;ol&gt;</code> - Lists</li>
+                            <li><code>&lt;header&gt;</code>, <code>&lt;footer&gt;</code> - Semantic containers</li>
+                        </ul>
+                    </div>
+                    <div class="comparison-item" style="background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border: 3px solid #f59e0b;">
+                        <h4 style="color: #92400e;">📝 Inline Elements</h4>
+                        <p><strong>Characteristics:</strong></p>
+                        <ul>
+                            <li>Don't start on a new line</li>
+                            <li>Only take up necessary space</li>
+                            <li>Can only contain other inline elements</li>
+                            <li>Flow within text</li>
+                        </ul>
+                        <p style="margin-top: 15px;"><strong>Common Examples:</strong></p>
+                        <ul>
+                            <li><code>&lt;a&gt;</code> - Links</li>
+                            <li><code>&lt;span&gt;</code> - Inline container</li>
+                            <li><code>&lt;strong&gt;</code> - Bold text</li>
+                            <li><code>&lt;em&gt;</code> - Italic text</li>
+                            <li><code>&lt;img&gt;</code> - Images</li>
+                            <li><code>&lt;code&gt;</code> - Code snippets</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <h4>Visual Example:</h4>
+                <pre><code>&lt;!-- Block elements stack vertically --&gt;
+&lt;h1&gt;Main Heading&lt;/h1&gt;
+&lt;p&gt;This is a paragraph.&lt;/p&gt;
+&lt;p&gt;This is another paragraph.&lt;/p&gt;
+
+&lt;!-- Inline elements flow horizontally --&gt;
+&lt;p&gt;This text has &lt;strong&gt;bold&lt;/strong&gt; and &lt;em&gt;italic&lt;/em&gt; words.&lt;/p&gt;</code></pre>
+                
+                <h3>💬 HTML Comments</h3>
+                <p>Comments allow you to add notes in your code that won't be displayed to users. They're essential for documentation and collaboration.</p>
+                
+                <pre><code>&lt;!-- This is a comment --&gt;
+&lt;p&gt;This text will display.&lt;/p&gt;
+&lt;!-- This comment won't display --&gt;
+
+&lt;!-- 
+    Multi-line comments
+    are also possible
+--&gt;
+
+&lt;!-- TODO: Add image here --&gt;
+&lt;!-- NOTE: This section needs review --&gt;</code></pre>
+                
+                <div class="success-box">
+                    <h4>💡 When to Use Comments:</h4>
+                    <ul style="line-height: 1.9;">
+                        <li>Explain complex or confusing code</li>
+                        <li>Temporarily disable code during development</li>
+                        <li>Leave notes for other developers (or your future self!)</li>
+                        <li>Mark sections of your HTML</li>
+                        <li>Add TODO reminders</li>
+                    </ul>
+                    <p style="margin-top: 15px;"><strong>Keyboard Shortcut:</strong> Most code editors use <span class="inline-code">Ctrl + /</span> (Windows) or <span class="inline-code">Cmd + /</span> (Mac) to toggle comments.</p>
+                </div>
+                
+                <h3>🎯 Attributes and Values</h3>
+                <p>Attributes provide additional information about HTML elements. They're written as name-value pairs inside the opening tag.</p>
+                
+                <h4>Syntax:</h4>
+                <pre><code>&lt;element attribute="value"&gt;Content&lt;/element&gt;</code></pre>
+                
+                <h4>Real Examples:</h4>
+                <pre><code>&lt;!-- Image with source and alt text --&gt;
+&lt;img src="photo.jpg" alt="My photo" width="300" height="200"&gt;
+
+&lt;!-- Link with URL and target --&gt;
+&lt;a href="https://example.com" target="_blank" title="Visit Example"&gt;Click here&lt;/a&gt;
+
+&lt;!-- Input with type and placeholder --&gt;
+&lt;input type="email" placeholder="Enter your email" required&gt;
+
+&lt;!-- Div with class and id --&gt;
+&lt;div id="header" class="container"&gt;Content&lt;/div&gt;</code></pre>
+                
+                <h3>🌍 Global vs Element-Specific Attributes</h3>
+                
+                <div class="comparison">
+                    <div class="comparison-item comparison-good">
+                        <h4>🌍 Global Attributes (work on ANY element)</h4>
+                        <ul>
+                            <li><strong>id</strong> - Unique identifier for an element</li>
+                            <li><strong>class</strong> - Classifies elements into groups</li>
+                            <li><strong>style</strong> - Inline CSS styling</li>
+                            <li><strong>title</strong> - Tooltip text on hover</li>
+                            <li><strong>lang</strong> - Language of element content</li>
+                            <li><strong>hidden</strong> - Hides the element</li>
+                        </ul>
+                        <pre style="margin-top: 15px;"><code>&lt;p id="intro" class="highlight" title="Introduction"&gt;
+    Hello World
+&lt;/p&gt;</code></pre>
+                    </div>
+                    <div class="comparison-item" style="background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%); border: 3px solid #6366f1;">
+                        <h4 style="color: #3730a3;">🎯 Element-Specific Attributes</h4>
+                        <ul>
+                            <li><strong>href</strong> - For <code>&lt;a&gt;</code> links</li>
+                            <li><strong>src</strong> - For <code>&lt;img&gt;</code>, <code>&lt;script&gt;</code></li>
+                            <li><strong>alt</strong> - For <code>&lt;img&gt;</code> images</li>
+                            <li><strong>type</strong> - For <code>&lt;input&gt;</code>, <code>&lt;button&gt;</code></li>
+                            <li><strong>action</strong> - For <code>&lt;form&gt;</code></li>
+                            <li><strong>placeholder</strong> - For <code>&lt;input&gt;</code></li>
+                        </ul>
+                        <pre style="margin-top: 15px;"><code>&lt;a href="page.html"&gt;Link&lt;/a&gt;
+&lt;img src="pic.jpg" alt="Photo"&gt;
+&lt;input type="text" placeholder="Name"&gt;</code></pre>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- ELEMENTS SECTION -->
+            <section id="elements">
+                <h2>🏗️ Common HTML Elements</h2>
+                
+                <h3>📰 Headings (h1-h6)</h3>
+                <p>HTML provides six levels of headings, from <span class="inline-code">&lt;h1&gt;</span> (most important) to <span class="inline-code">&lt;h6&gt;</span> (least important). They create a hierarchy that helps organize your content.</p>
+                
+                <pre><code>&lt;h1&gt;Main Page Title (32px)&lt;/h1&gt;
+&lt;h2&gt;Major Section (24px)&lt;/h2&gt;
+&lt;h3&gt;Subsection (18px)&lt;/h3&gt;
+&lt;h4&gt;Minor Heading (16px)&lt;/h4&gt;
+&lt;h5&gt;Small Heading (14px)&lt;/h5&gt;
+&lt;h6&gt;Smallest Heading (12px)&lt;/h6&gt;</code></pre>
+                
+                <div class="warning-box">
+                    <h4>⚠️ Heading Best Practices:</h4>
+                    <ul style="line-height: 1.9;">
+                        <li><strong>Use only ONE <code>&lt;h1&gt;</code> per page</strong> - This should be your main page title</li>
+                        <li><strong>Don't skip levels</strong> - Go from h1 → h2 → h3, not h1 → h3</li>
+                        <li><strong>Use headings for structure, not styling</strong> - Don't use h3 just because you like the size</li>
+                        <li><strong>Make headings descriptive</strong> - They help users and search engines understand your content</li>
+                    </ul>
+                </div>
+                
+                <h3>🎯 Why Headings Matter</h3>
+                <div class="grid-3">
+                    <div class="card">
+                        <h4>👥 For Users</h4>
+                        <p>Easier to scan content and find information quickly</p>
+                    </div>
+                    <div class="card">
+                        <h4>♿ For Accessibility</h4>
+                        <p>Screen readers use headings to navigate pages</p>
+                    </div>
+                    <div class="card">
+                        <h4>🔍 For SEO</h4>
+                        <p>Search engines use headings to understand content structure</p>
+                    </div>
+                </div>
+                
+                <h3>📄 Paragraphs</h3>
+                <p>The <span class="inline-code">&lt;p&gt;</span> tag defines a paragraph of text. Browsers automatically add space above and below paragraphs for better readability.</p>
+                
+                <pre><code>&lt;p&gt;This is a paragraph of text. It can contain multiple sentences.&lt;/p&gt;
+
+&lt;p&gt;This is another paragraph. Each paragraph is separated by space.&lt;/p&gt;
+
+&lt;p&gt;You can have as many paragraphs as you need to organize your content.&lt;/p&gt;</code></pre>
+                
+                <h3>✨ Text Formatting</h3>
+                <p>HTML provides several inline elements to format text within paragraphs:</p>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Tag</th>
+                            <th>Purpose</th>
+                            <th>Example</th>
+                            <th>Result</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>&lt;strong&gt;</code></td>
+                            <td>Important text (bold)</td>
+                            <td><code>&lt;strong&gt;Bold&lt;/strong&gt;</code></td>
+                            <td><strong>Bold</strong></td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;em&gt;</code></td>
+                            <td>Emphasized text (italic)</td>
+                            <td><code>&lt;em&gt;Italic&lt;/em&gt;</code></td>
+                            <td><em>Italic</em></td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;u&gt;</code></td>
+                            <td>Underlined text</td>
+                            <td><code>&lt;u&gt;Underlined&lt;/u&gt;</code></td>
+                            <td><u>Underlined</u></td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;mark&gt;</code></td>
+                            <td>Highlighted text</td>
+                            <td><code>&lt;mark&gt;Marked&lt;/mark&gt;</code></td>
+                            <td><mark>Marked</mark></td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;small&gt;</code></td>
+                            <td>Smaller text</td>
+                            <td><code>&lt;small&gt;Small&lt;/small&gt;</code></td>
+                            <td><small>Small</small></td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;code&gt;</code></td>
+                            <td>Code snippet</td>
+                            <td><code>&lt;code&gt;code&lt;/code&gt;</code></td>
+                            <td><code>code</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <h4>Example Usage:</h4>
+                <pre><code>&lt;p&gt;This is &lt;strong&gt;very important&lt;/strong&gt; information.&lt;/p&gt;
+
+&lt;p&gt;The word &lt;em&gt;emphasis&lt;/em&gt; is italicized for emphasis.&lt;/p&gt;
+
+&lt;p&gt;You can &lt;u&gt;underline&lt;/u&gt; text when needed.&lt;/p&gt;
+
+&lt;p&gt;Use &lt;mark&gt;highlighting&lt;/mark&gt; to draw attention.&lt;/p&gt;</code></pre>
+                
+                <h3>📋 Lists</h3>
+                <p>HTML provides two main types of lists for organizing information:</p>
+                
+                <div class="comparison">
+                    <div class="comparison-item comparison-good">
+                        <h4>🔢 Ordered Lists (Numbered)</h4>
+                        <p>Use when the order of items matters (steps, rankings, sequences)</p>
+                        <pre><code>&lt;ol&gt;
+  &lt;li&gt;First item&lt;/li&gt;
+  &lt;li&gt;Second item&lt;/li&gt;
+  &lt;li&gt;Third item&lt;/li&gt;
+&lt;/ol&gt;</code></pre>
+                        <p><strong>Displays as:</strong></p>
+                        <ol>
+                            <li>First item</li>
+                            <li>Second item</li>
+                            <li>Third item</li>
+                        </ol>
+                    </div>
+                    <div class="comparison-item comparison-good">
+                        <h4>🔵 Unordered Lists (Bullets)</h4>
+                        <p>Use when order doesn't matter (features, items, collections)</p>
+                        <pre><code>&lt;ul&gt;
+  &lt;li&gt;Bullet point&lt;/li&gt;
+  &lt;li&gt;Another point&lt;/li&gt;
+  &lt;li&gt;Final point&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+                        <p><strong>Displays as:</strong></p>
+                        <ul>
+                            <li>Bullet point</li>
+                            <li>Another point</li>
+                            <li>Final point</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <h4>Real-World Examples:</h4>
+                <pre><code>&lt;h2&gt;How to Make a Sandwich&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;Get two slices of bread&lt;/li&gt;
+  &lt;li&gt;Add your favorite filling&lt;/li&gt;
+  &lt;li&gt;Put the slices together&lt;/li&gt;
+  &lt;li&gt;Enjoy!&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2&gt;Shopping List&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;Milk&lt;/li&gt;
+  &lt;li&gt;Eggs&lt;/li&gt;
+  &lt;li&gt;Bread&lt;/li&gt;
+  &lt;li&gt;Butter&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+                
+                <h3>🔗 Links (Anchor Tags)</h3>
+                <p>The <span class="inline-code">&lt;a&gt;</span> (anchor) tag creates clickable links that navigate to other pages or resources.</p>
+                
+                <pre><code>&lt;!-- Basic link --&gt;
+&lt;a href="https://www.google.com"&gt;Go to Google&lt;/a&gt;
+
+&lt;!-- Link that opens in new tab --&gt;
+&lt;a href="https://www.example.com" target="_blank"&gt;Open in New Tab&lt;/a&gt;
+
+&lt;!-- Email link --&gt;
+&lt;a href="mailto:email@example.com"&gt;Send Email&lt;/a&gt;
+
+&lt;!-- Phone link --&gt;
+&lt;a href="tel:+1234567890"&gt;Call Us&lt;/a&gt;
+
+&lt;!-- Link to section on same page --&gt;
+&lt;a href="#section-id"&gt;Jump to Section&lt;/a&gt;</code></pre>
+                
+                <div class="info-box">
+                    <h4>📝 Link Attributes:</h4>
+                    <ul style="line-height: 1.9;">
+                        <li><strong>href</strong> - The URL or destination (required)</li>
+                        <li><strong>target="_blank"</strong> - Opens link in a new tab/window</li>
+                        <li><strong>title</strong> - Tooltip text that appears on hover</li>
+                        <li><strong>rel="noopener"</strong> - Security best practice for external links</li>
+                    </ul>
+                </div>
+                
+                <h3>🖼️ Images</h3>
+                <p>The <span class="inline-code">&lt;img&gt;</span> tag embeds images into your webpage. It's a self-closing tag.</p>
+                
+                <pre><code>&lt;!-- Basic image --&gt;
+&lt;img src="photo.jpg" alt="Description of photo"&gt;
+
+&lt;!-- Image with dimensions --&gt;
+&lt;img src="logo.png" alt="Company Logo" width="200" height="100"&gt;
+
+&lt;!-- Image with title tooltip --&gt;
+&lt;img src="sunset.jpg" alt="Beautiful sunset" title="Sunset at the beach"&gt;</code></pre>
+                
+                <div class="danger-box">
+                    <h4>⚠️ ALWAYS Include Alt Text!</h4>
+                    <p>The <span class="inline-code">alt</span> attribute is crucial for:</p>
+                    <ul style="line-height: 1.9;">
+                        <li><strong>Accessibility:</strong> Screen readers describe images to visually impaired users</li>
+                        <li><strong>SEO:</strong> Search engines understand what your images show</li>
+                        <li><strong>Fallback:</strong> Text displays if the image fails to load</li>
+                        <li><strong>Context:</strong> Helps users understand the image's purpose</li>
+                    </ul>
+                </div>
+                
+                <h3>📸 Image File Formats</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Format</th>
+                            <th>Best For</th>
+                            <th>Features</th>
+                            <th>When to Use</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>JPG/JPEG</strong></td>
+                            <td>Photographs</td>
+                            <td>Small file size, no transparency</td>
+                            <td>Photos, complex images with many colors</td>
+                        </tr>
+                        <tr>
+                            <td><strong>PNG</strong></td>
+                            <td>Graphics, logos</td>
+                            <td>Transparency support, lossless</td>
+                            <td>Logos, icons, images needing transparency</td>
+                        </tr>
+                        <tr>
+                            <td><strong>GIF</strong></td>
+                            <td>Simple animations</td>
+                            <td>Limited colors, animations</td>
+                            <td>Simple animations, small graphics</td>
+                        </tr>
+                        <tr>
+                            <td><strong>SVG</strong></td>
+                            <td>Icons, logos</td>
+                            <td>Scalable, stays sharp at any size</td>
+                            <td>Icons, logos, illustrations</td>
+                        </tr>
+                        <tr>
+                            <td><strong>WebP</strong></td>
+                            <td>Modern web</td>
+                            <td>Smaller files, better quality</td>
+                            <td>Modern websites (with fallbacks)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            
+            <!-- SEMANTIC HTML SECTION -->
+            <section id="semantic">
+                <h2>🏛️ Semantic HTML5</h2>
+                
+                <h3>🤔 What is Semantic HTML?</h3>
+                <div class="info-box">
+                    <p style="font-size: 1.15em;"><strong>Semantic = Meaningful</strong></p>
+                    <p style="margin-top: 15px;">Semantic HTML uses tags that describe the <strong>meaning and purpose</strong> of content, not just how it looks. Instead of generic <code>&lt;div&gt;</code> elements everywhere, you use specific tags that tell browsers, search engines, and developers what each section of content represents.</p>
+                </div>
+                
+                <div class="comparison">
+                    <div class="comparison-item comparison-bad">
+                        <h4>❌ Non-Semantic HTML</h4>
+                        <pre><code>&lt;div class="header"&gt;
+  &lt;div class="nav"&gt;...&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="main"&gt;
+  &lt;div class="article"&gt;...&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="footer"&gt;...&lt;/div&gt;</code></pre>
+                        <p>Doesn't convey meaning - just generic containers</p>
+                    </div>
+                    <div class="comparison-item comparison-good">
+                        <h4>✅ Semantic HTML</h4>
+                        <pre><code>&lt;header&gt;
+  &lt;nav&gt;...&lt;/nav&gt;
+&lt;/header&gt;
+&lt;main&gt;
+  &lt;article&gt;...&lt;/article&gt;
+&lt;/main&gt;
+&lt;footer&gt;...&lt;/footer&gt;</code></pre>
+                        <p>Clear, meaningful structure everyone understands</p>
+                    </div>
+                </div>
+                
+                <h3>✨ Why Use Semantic HTML?</h3>
+                <div class="grid-3">
+                    <div class="card">
+                        <h4>🔍 Better SEO</h4>
+                        <p>Search engines understand your content structure and can rank it more effectively</p>
+                    </div>
+                    <div class="card">
+                        <h4>♿ Improved Accessibility</h4>
+                        <p>Screen readers navigate pages more easily, helping users with disabilities</p>
+                    </div>
+                    <div class="card">
+                        <h4>📖 Easier Maintenance</h4>
+                        <p>Other developers (and future you!) understand code faster</p>
+                    </div>
+                    <div class="card">
+                        <h4>🎯 Better Semantics</h4>
+                        <p>Code clearly communicates the purpose of each section</p>
+                    </div>
+                    <div class="card">
+                        <h4>🌐 Browser Support</h4>
+                        <p>Browsers apply appropriate default styling automatically</p>
+                    </div>
+                    <div class="card">
+                        <h4>🤖 Machine Readable</h4>
+                        <p>AI and automated tools can better parse your content</p>
+                    </div>
+                </div>
+                
+                <h3>🏛️ Key Semantic Elements</h3>
+                
+                <div style="margin: 40px 0;">
+                    <h4>&lt;header&gt; - The Page/Section Introduction</h4>
+                    <p>Contains introductory content or navigational aids. Can be used for the whole page or individual sections.</p>
+                    <pre><code>&lt;header&gt;
+  &lt;img src="logo.png" alt="Company Logo"&gt;
+  &lt;h1&gt;My Website&lt;/h1&gt;
+  &lt;nav&gt;
+    &lt;a href="#home"&gt;Home&lt;/a&gt;
+    &lt;a href="#about"&gt;About&lt;/a&gt;
+    &lt;a href="#contact"&gt;Contact&lt;/a&gt;
+  &lt;/nav&gt;
+&lt;/header&gt;</code></pre>
+                    <div class="success-box">
+                        <p><strong>Typically contains:</strong> Logo, site title, main navigation, search bar</p>
+                    </div>
+                </div>
+                
+                <div style="margin: 40px 0;">
+                    <h4>&lt;nav&gt; - Navigation Links</h4>
+                    <p>Contains navigation links for the site or page sections.</p>
+                    <pre><code>&lt;nav&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;a href="#contact"&gt;Contact&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/nav&gt;</code></pre>
+                    <div class="success-box">
+                        <p><strong>Use for:</strong> Main site navigation, breadcrumbs, table of contents, pagination</p>
+                    </div>
+                </div>
+                
+                <div style="margin: 40px 0;">
+                    <h4>&lt;main&gt; - The Primary Content</h4>
+                    <p>Contains the main content of the page. <strong>Only ONE</strong> <code>&lt;main&gt;</code> per page!</p>
+                    <pre><code>&lt;main&gt;
+  &lt;h1&gt;Welcome to My Website&lt;/h1&gt;
+  &lt;p&gt;This is the primary content area...&lt;/p&gt;
+  
+  &lt;section&gt;
+    &lt;h2&gt;Our Services&lt;/h2&gt;
+    &lt;p&gt;We offer...&lt;/p&gt;
+  &lt;/section&gt;
+&lt;/main&gt;</code></pre>
+                    <div class="warning-box">
+                        <p><strong>⚠️ Important Rules:</strong></p>
+                        <ul>
+                            <li>Only ONE <code>&lt;main&gt;</code> element per page</li>
+                            <li>Should NOT be inside <code>&lt;header&gt;</code>, <code>&lt;footer&gt;</code>, <code>&lt;aside&gt;</code>, <code>&lt;nav&gt;</code>, or <code>&lt;article&gt;</code></li>
+                            <li>Content should be unique to the page</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div style="margin: 40px 0;">
+                    <h4>&lt;section&gt; - Thematic Grouping</h4>
+                    <p>Groups related content together with a common theme. Should typically have a heading.</p>
+                    <pre><code>&lt;section&gt;
+  &lt;h2&gt;About Us&lt;/h2&gt;
+  &lt;p&gt;We are a company that...&lt;/p&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+  &lt;h2&gt;Our Mission&lt;/h2&gt;
+  &lt;p&gt;Our mission is to...&lt;/p&gt;
+&lt;/section&gt;</code></pre>
+                    <div class="success-box">
+                        <p><strong>Use for:</strong> Chapters, tabs, numbered sections, different topics on a page</p>
+                    </div>
+                </div>
+                
+                <div style="margin: 40px 0;">
+                    <h4>&lt;article&gt; - Self-Contained Content</h4>
+                    <p>Represents a complete, independent piece of content that could stand alone.</p>
+                    <pre><code>&lt;article&gt;
+  &lt;h2&gt;10 Tips for Learning HTML&lt;/h2&gt;
+  &lt;p&gt;Published on &lt;time datetime="2025-01-15"&gt;January 15, 2025&lt;/time&gt;&lt;/p&gt;
+  &lt;p&gt;Learning HTML can be fun and rewarding...&lt;/p&gt;
+  &lt;footer&gt;
+    &lt;p&gt;By John Doe&lt;/p&gt;
+  &lt;/footer&gt;
+&lt;/article&gt;</code></pre>
+                    <div class="success-box">
+                        <p><strong>Use for:</strong> Blog posts, news articles, forum posts, user comments, product cards</p>
+                        <p style="margin-top: 10px;"><strong>Test:</strong> Could this content be distributed independently (RSS feed, social media)? If yes, use <code>&lt;article&gt;</code>!</p>
+                    </div>
+                </div>
+                
+                <div style="margin: 40px 0;">
+                    <h4>&lt;aside&gt; - Supplementary Content</h4>
+                    <p>Contains content that's tangentially related to the main content.</p>
+                    <pre><code>&lt;aside&gt;
+  &lt;h3&gt;Related Articles&lt;/h3&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;a href="#"&gt;Introduction to CSS&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#"&gt;JavaScript Basics&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/aside&gt;</code></pre>
+                    <div class="success-box">
+                        <p><strong>Use for:</strong> Sidebars, pull quotes, related links, advertisements, author bios</p>
+                    </div>
+                </div>
+                
+                <div style="margin: 40px 0;">
+                    <h4>&lt;footer&gt; - The Page/Section Conclusion</h4>
+                    <p>Contains footer information for the page or a section. Can be used multiple times.</p>
+                    <pre><code>&lt;footer&gt;
+  &lt;p&gt;&amp;copy; 2025 My Website. All rights reserved.&lt;/p&gt;
+  &lt;nav&gt;
+    &lt;a href="#privacy"&gt;Privacy Policy&lt;/a&gt;
+    &lt;a href="#terms"&gt;Terms of Service&lt;/a&gt;
+  &lt;/nav&gt;
+  &lt;p&gt;Contact: &lt;a href="mailto:info@example.com"&gt;info@example.com&lt;/a&gt;&lt;/p&gt;
+&lt;/footer&gt;</code></pre>
+                    <div class="success-box">
+                        <p><strong>Typically contains:</strong> Copyright info, contact details, social media links, secondary navigation, legal links</p>
+                    </div>
+                </div>
+                
+                <h3>🏗️ Complete Semantic Structure Example</h3>
+                <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;My Semantic Website&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;header&gt;
+        &lt;h1&gt;My Website&lt;/h1&gt;
+        &lt;nav&gt;
+            &lt;ul&gt;
+                &lt;li&gt;&lt;a href="#home"&gt;Home&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href="#about"&gt;About&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href="#blog"&gt;Blog&lt;/a&gt;&lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/nav&gt;
+    &lt;/header&gt;
+    
+    &lt;main&gt;
+        &lt;section id="about"&gt;
+            &lt;h2&gt;About Us&lt;/h2&gt;
+            &lt;p&gt;We are a company dedicated to...&lt;/p&gt;
+        &lt;/section&gt;
+        
+        &lt;section id="blog"&gt;
+            &lt;h2&gt;Latest Blog Posts&lt;/h2&gt;
+            
+            &lt;article&gt;
+                &lt;h3&gt;First Blog Post&lt;/h3&gt;
+                &lt;p&gt;Published on January 15, 2025&lt;/p&gt;
+                &lt;p&gt;Content of the blog post...&lt;/p&gt;
+            &lt;/article&gt;
+            
+            &lt;article&gt;
+                &lt;h3&gt;Second Blog Post&lt;/h3&gt;
+                &lt;p&gt;Published on January 10, 2025&lt;/p&gt;
+                &lt;p&gt;Content of the blog post...&lt;/p&gt;
+            &lt;/article&gt;
+        &lt;/section&gt;
+    &lt;/main&gt;
+    
+    &lt;aside&gt;
+        &lt;h3&gt;Popular Posts&lt;/h3&gt;
+        &lt;ul&gt;
+            &lt;li&gt;&lt;a href="#"&gt;Top 10 HTML Tips&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#"&gt;CSS for Beginners&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/aside&gt;
+    
+    &lt;footer&gt;
+        &lt;p&gt;&amp;copy; 2025 My Website&lt;/p&gt;
+        &lt;p&gt;Contact: info@example.com&lt;/p&gt;
+    &lt;/footer&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+            </section>
+            
+            <!-- BEST PRACTICES SECTION -->
+            <section id="best-practices">
+                <h2>✅ Best Practices for Writing HTML</h2>
+                
+                <h3>1. Use Consistent Indentation</h3>
+                <p>Proper indentation makes code readable and easier to debug.</p>
+                
+                <div class="comparison">
+                    <div class="comparison-item comparison-bad">
+                        <h4>❌ Bad - No Indentation</h4>
+                        <pre><code>&lt;div&gt;
+&lt;h1&gt;Title&lt;/h1&gt;
+&lt;p&gt;Text&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Item&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;</code></pre>
+                    </div>
+                    <div class="comparison-item comparison-good">
+                        <h4>✅ Good - Clear Indentation</h4>
+                        <pre><code>&lt;div&gt;
+  &lt;h1&gt;Title&lt;/h1&gt;
+  &lt;p&gt;Text&lt;/p&gt;
+  &lt;ul&gt;
+    &lt;li&gt;Item&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;</code></pre>
+                    </div>
+                </div>
+                
+                <h3>2. Use Semantic HTML</h3>
+                <div class="comparison">
+                    <div class="comparison-item comparison-bad">
+                        <h4>❌ Bad - Generic Divs</h4>
+                        <pre><code>&lt;div class="navigation"&gt;
+  &lt;div class="link"&gt;Home&lt;/div&gt;
+  &lt;div class="link"&gt;About&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                    </div>
+                    <div class="comparison-item comparison-good">
+                        <h4>✅ Good - Semantic Tags</h4>
+                        <pre><code>&lt;nav&gt;
+  &lt;a href="#home"&gt;Home&lt;/a&gt;
+  &lt;a href="#about"&gt;About&lt;/a&gt;
+&lt;/nav&gt;</code></pre>
+                    </div>
+                </div>
+                
+                <h3>3. Always Include Alt Text</h3>
+                <div class="comparison">
+                    <div class="comparison-item comparison-bad">
+                        <h4>❌ Bad - No Alt Text</h4>
+                        <pre><code>&lt;img src="photo.jpg"&gt;</code></pre>
+                        <p>Screen readers can't describe the image</p>
+                    </div>
+                    <div class="comparison-item comparison-good">
+                        <h4>✅ Good - Descriptive Alt Text</h4>
+                        <pre><code>&lt;img src="photo.jpg" 
+     alt="Sunset over mountains 
+     with orange and pink sky"&gt;</code></pre>
+                        <p>Accessible and descriptive</p>
+                    </div>
+                </div>
+                
+                <h3>4. Use Lowercase Tags and Attributes</h3>
+                <div class="comparison">
+                    <div class="comparison-item comparison-bad">
+                        <h4>❌ Bad - Mixed Case</h4>
+                        <pre><code>&lt;DIV Class="Container"&gt;
+  &lt;H1&gt;TITLE&lt;/H1&gt;
+&lt;/DIV&gt;</code></pre>
+                    </div>
+                    <div class="comparison-item comparison-good">
+                        <h4>✅ Good - Lowercase</h4>
+                        <pre><code>&lt;div class="container"&gt;
+  &lt;h1&gt;Title&lt;/h1&gt;
+&lt;/div&gt;</code></pre>
+                    </div>
+                </div>
+                
+                <h3>5. Close All Tags Properly</h3>
+                <div class="comparison">
+                    <div class="comparison-item comparison-bad">
+                        <h4>❌ Bad - Unclosed Tags</h4>
+                        <pre><code>&lt;p&gt;First paragraph
+&lt;p&gt;Second paragraph
+&lt;ul&gt;
+  &lt;li&gt;Item 1
+  &lt;li&gt;Item 2</code></pre>
+                    </div>
+                    <div class="comparison-item comparison-good">
+                        <h4>✅ Good - All Tags Closed</h4>
+                        <pre><code>&lt;p&gt;First paragraph&lt;/p&gt;
+&lt;p&gt;Second paragraph&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Item 1&lt;/li&gt;
+  &lt;li&gt;Item 2&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+                    </div>
+                </div>
+                
+                <h3>6. Add Meaningful Comments</h3>
+                <div class="comparison">
+                    <div class="comparison-item comparison-bad">
+                        <h4>❌ Bad - No Comments</h4>
+                        <pre><code>&lt;section&gt;
+  &lt;h2&gt;Products&lt;/h2&gt;
+  ...
+&lt;/section&gt;
+&lt;section&gt;
+  &lt;h2&gt;Reviews&lt;/h2&gt;
+  ...</code></pre>
+                    </div>
+                    <div class="comparison-item comparison-good">
+                        <h4>✅ Good - Clear Comments</h4>
+                        <pre><code>&lt;!-- Products Section --&gt;
+&lt;section&gt;
+  &lt;h2&gt;Products&lt;/h2&gt;
+  ...
+&lt;/section&gt;
+
+&lt;!-- Customer Reviews --&gt;
+&lt;section&gt;
+  &lt;h2&gt;Reviews&lt;/h2&gt;
+  ...</code></pre>
+                    </div>
+                </div>
+                
+                <div class="success-box" style="margin-top: 40px;">
+                    <h3>📋 Complete Best Practices Checklist</h3>
+                    <ul style="font-size: 1.05em; line-height: 2;">
+                        <li>✅ Use consistent indentation (2 or 4 spaces)</li>
+                        <li>✅ Use semantic HTML tags where appropriate</li>
+                        <li>✅ Always include alt text for images</li>
+                        <li>✅ Use lowercase for tags and attributes</li>
+                        <li>✅ Quote all attribute values</li>
+                        <li>✅ Add comments to explain complex code</li>
+                        <li>✅ Validate your HTML regularly</li>
+                        <li>✅ Keep one &lt;h1&gt; per page</li>
+                        <li>✅ Follow proper heading hierarchy (h1 → h2 → h3)</li>
+                        <li>✅ Close all tags properly</li>
+                        <li>✅ Use meaningful class and id names</li>
+                        <li>✅ Keep your code organized and clean</li>
+                    </ul>
+                </div>
+                
+                <h3>🔍 Validate Your HTML</h3>
+                <div class="info-box">
+                    <h4>Use the W3C Markup Validator</h4>
+                    <p style="font-size: 1.1em; margin: 15px 0;"><strong>URL:</strong> <a href="https://validator.w3.org/" target="_blank">https://validator.w3.org/</a></p>
+                    <h4>Benefits of Validation:</h4>
+                    <ul style="line-height: 1.9;">
+                        <li>✅ Catches syntax errors and typos</li>
+                        <li>✅ Ensures browser compatibility</li>
+                        <li>✅ Follows web standards</li>
+                        <li>✅ Improves accessibility</li>
+                        <li>✅ Better SEO performance</li>
+                        <li>✅ Prevents future bugs</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <!-- DOM SECTION -->
+            <section id="dom">
+                <h2>🌲 The Document Object Model (DOM)</h2>
+                
+                <div class="info-box">
+                    <h3 style="margin-top: 0; color: #0891b2;">What is the DOM?</h3>
+                    <p style="font-size: 1.1em;">The <strong>Document Object Model (DOM)</strong> is a programming interface for HTML documents. When a web page loads, the browser creates a tree-like representation of the page in memory. This allows JavaScript to access and manipulate the content, structure, and styles dynamically.</p>
+                </div>
+                
+                <h3>🌳 DOM Tree Structure</h3>
+                <pre><code>document
+  └── html
+      ├── head
+      │   ├── title
+      │   │   └── "Page Title"
+      │   ├── meta
+      │   └── link
+      └── body
+          ├── header
+          │   ├── h1
+          │   │   └── "Welcome"
+          │   └── nav
+          │       └── ul
+          │           ├── li → a
+          │           └── li → a
+          ├── main
+          │   ├── section
+          │   │   ├── h2
+          │   │   └── p
+          │   └── article
+          │       ├── h3
+          │       └── p
+          └── footer
+              └── p</code></pre>
+              
+                <h3>🔍 Types of DOM Nodes</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Node Type</th>
+                            <th>Description</th>
+                            <th>Example</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Document Node</strong></td>
+                            <td>The root of the entire HTML document</td>
+                            <td><code>document</code></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Element Nodes</strong></td>
+                            <td>HTML elements/tags</td>
+                            <td><code>&lt;div&gt;</code>, <code>&lt;p&gt;</code>, <code>&lt;h1&gt;</code></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Attribute Nodes</strong></td>
+                            <td>Element attributes</td>
+                            <td><code>href="..."</code>, <code>class="..."</code></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Text Nodes</strong></td>
+                            <td>Text content within elements</td>
+                            <td>The actual text inside tags</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Comment Nodes</strong></td>
+                            <td>HTML comments</td>
+                            <td><code>&lt;!-- comment --&gt;</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="success-box">
+                    <h3>🔍 Try It Yourself!</h3>
+                    <h4>Exploring the DOM with Browser DevTools:</h4>
+                    <ol style="font-size: 1.05em; line-height: 2;">
+                        <li><strong>Right-click</strong> anywhere on this webpage</li>
+                        <li>Select <strong>"Inspect"</strong> or <strong>"Inspect Element"</strong></li>
+                        <li>Explore the HTML structure in the Elements/Inspector panel</li>
+                        <li>Click on different elements to see them highlighted on the page</li>
+                        <li>Try double-clicking text in the inspector to edit it (changes are temporary!)</li>
+                    </ol>
+                    <p style="margin-top: 20px; font-size: 1.1em;"><strong>This is the DOM in action!</strong> You're seeing the live tree structure of the webpage.</p>
+                </div>
+                
+                <h3>⚡ What Can You Do with the DOM?</h3>
+                <ul style="font-size: 1.05em; line-height: 2;">
+                    <li>🔄 Change content dynamically (update text, images, etc.)</li>
+                    <li>➕ Add new HTML elements to the page</li>
+                    <li>🗑️ Remove existing elements</li>
+                    <li>🎨 Modify styles and CSS classes</li>
+                    <li>🎯 Respond to user interactions (clicks, typing, etc.)</li>
+                    <li>📊 Create animations and visual effects</li>
+                    <li>✔️ Validate forms before submission</li>
+                    <li>🔄 Load content without refreshing the page</li>
+                </ul>
+            </section>
+            
+            <!-- ACTIVITIES SECTION -->
+            <section id="activities">
+                <h2>🎯 Class Activities &amp; Assignments</h2>
+                
+                <div class="activity-card">
+                    <h3>🎵 Activity 1: Song Lyric Page</h3>
+                    <p><strong>⏱️ Time:</strong> 15 minutes</p>
+                    <p style="font-size: 1.1em; margin: 15px 0;"><strong>Task:</strong> Create an HTML page for your favorite song (school-appropriate lyrics only!)</p>
+                    
+                    <h4>📋 Requirements:</h4>
+                    <ul style="font-size: 1.05em; line-height: 2;">
+                        <li>✅ Use <code>&lt;!DOCTYPE html&gt;</code> declaration</li>
+                        <li>✅ Proper HTML structure (html, head, body)</li>
+                        <li>✅ <code>&lt;title&gt;</code> tag with song title</li>
+                        <li>✅ Use <code>&lt;h1&gt;</code> for the song title</li>
+                        <li>✅ Use <code>&lt;h2&gt;</code> for the artist name</li>
+                        <li>✅ Use <code>&lt;p&gt;</code> tags for each verse</li>
+                        <li>✅ Use <code>&lt;strong&gt;</code> to emphasize important words</li>
+                        <li>✅ Use <code>&lt;em&gt;</code> for lyrics you want to highlight</li>
+                        <li>✅ Add comments to organize your sections</li>
+                    </ul>
+                    
+                    <h4>💡 Tips:</h4>
+                    <ul style="line-height: 1.9;">
+                        <li>Organize verses with comments like <code>&lt;!-- Verse 1 --&gt;</code></li>
+                        <li>Use <code>&lt;br&gt;</code> tags for line breaks within verses</li>
+                        <li>Keep it school-appropriate!</li>
+                    </ul>
+                </div>
+                
+                <div class="activity-card purple">
+                    <h3>👤 Activity 2: About Me Page</h3>
+                    <p><strong>⏱️ Time:</strong> 20-30 minutes during class</p>
+                    <p style="font-size: 1.1em; margin: 15px 0;"><strong>Task:</strong> Create a personal webpage about yourself</p>
+                    
+                    <h4>📋 Required Elements:</h4>
+                    <ul style="font-size: 1.05em; line-height: 2;">
+                        <li>✅ <code>&lt;!DOCTYPE html&gt;</code> declaration</li>
+                        <li>✅ Proper <code>&lt;html&gt;</code>, <code>&lt;head&gt;</code>, <code>&lt;body&gt;</code> structure</li>
+                        <li>✅ Page <code>&lt;title&gt;</code> in the head section</li>
+                        <li>✅ ONE <code>&lt;h1&gt;</code> with your name</li>
+                        <li>✅ At least THREE <code>&lt;h2&gt;</code> section headings</li>
+                        <li>✅ Multiple paragraphs with text formatting (<code>&lt;strong&gt;</code>, <code>&lt;em&gt;</code>)</li>
+                        <li>✅ At least ONE image with proper alt text</li>
+                        <li>✅ ONE ordered list (favorites, steps, goals, etc.)</li>
+                        <li>✅ ONE unordered list (hobbies, skills, interests, etc.)</li>
+                        <li>✅ At least TWO working links (social media, portfolio, etc.)</li>
+                        <li>✅ Semantic HTML tags (<code>&lt;header&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;section&gt;</code>, <code>&lt;footer&gt;</code>)</li>
+                    </ul>
+                    
+                    <h4>💡 Suggested Sections:</h4>
+                    <ul style="line-height: 1.9;">
+                        <li><strong>About Me:</strong> Brief introduction, where you're from, what you're studying</li>
+                        <li><strong>My Interests:</strong> Hobbies, favorite activities, sports or clubs</li>
+                        <li><strong>My Favorites:</strong> Favorite books, movies, music, foods</li>
+                        <li><strong>Goals:</strong> What you want to learn or achieve</li>
+                        <li><strong>Contact/Connect:</strong> Social media links, email</li>
+                    </ul>
+                    
+                    <h4>🏆 Grading Rubric (100 points total):</h4>
+                    <table style="width: 100%; margin-top: 20px; background: white; color: #1a202c;">
+                        <thead>
+                            <tr>
+                                <th>Category</th>
+                                <th>Points</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>HTML Structure</strong></td>
+                                <td>20</td>
+                                <td>DOCTYPE, proper nesting, indentation</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Required Elements</strong></td>
+                                <td>30</td>
+                                <td>All elements present and used correctly</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Semantic HTML</strong></td>
+                                <td>20</td>
+                                <td>Use of header, main, section, footer</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Code Quality</strong></td>
+                                <td>15</td>
+                                <td>Clean code, comments, validated HTML</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Creativity &amp; Content</strong></td>
+                                <td>15</td>
+                                <td>Interesting content, good organization</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="activity-card green">
+                    <h3>🐱 Homework: Build a Cat Photo App</h3>
+                    <p><strong>📅 Due:</strong> Next class session</p>
+                    <p style="font-size: 1.1em; margin: 15px 0;"><strong>Task:</strong> Create a fun, multi-section webpage all about cats!</p>
+                    
+                    <h4>📋 Requirements:</h4>
+                    <ul style="font-size: 1.05em; line-height: 2;">
+                        <li>✅ Multiple themed sections about cats</li>
+                        <li>✅ At least FIVE cat images with descriptive alt text</li>
+                        <li>✅ A photo gallery organized using lists</li>
+                        <li>✅ Links to cat-related websites (shelters, cat facts, etc.)</li>
+                        <li>✅ Proper semantic HTML structure throughout</li>
+                        <li>✅ Headings, paragraphs, and formatted text</li>
+                        <li>✅ Both ordered and unordered lists</li>
+                        <li>✅ Comments explaining different sections of your code</li>
+                        <li>✅ Validated HTML (use W3C Validator)</li>
+                    </ul>
+                    
+                    <h4>💡 Suggested Sections:</h4>
+                    <ul style="line-height: 1.9;">
+                        <li><strong>Cat Facts:</strong> Interesting information about cats</li>
+                        <li><strong>Photo Gallery:</strong> Collection of cat images</li>
+                        <li><strong>Cat Breeds:</strong> Different types of cats</li>
+                        <li><strong>Cat Care Tips:</strong> How to care for cats</li>
+                        <li><strong>Resources:</strong> Links to cat shelters and organizations</li>
+                    </ul>
+                    
+                    <h4>🌟 Stretch Goals (Optional - Extra Credit):</h4>
+                    <ul style="line-height: 1.9;">
+                        <li>🎯 Create multiple pages and link them together (index.html, gallery.html, facts.html)</li>
+                        <li>🎯 Add a navigation menu for easy page access</li>
+                        <li>🎯 Include a table with cat breed information</li>
+                        <li>🎯 Add more interesting cat facts with citations</li>
+                        <li>🎯 Create a "contact" or "adoption" section</li>
+                        <li>🎯 Use more advanced semantic tags</li>
+                    </ul>
+                    
+                    <h4>📸 Where to Find Cat Images:</h4>
+                    <p style="margin-top: 15px;"><strong>Free Stock Photo Sites:</strong></p>
+                    <ul style="line-height: 1.9;">
+                        <li><strong>Unsplash:</strong> <a href="https://unsplash.com/s/photos/cat" target="_blank" style="color: white; text-decoration: underline;">unsplash.com</a></li>
+                        <li><strong>Pexels:</strong> <a href="https://www.pexels.com/search/cat/" target="_blank" style="color: white; text-decoration: underline;">pexels.com</a></li>
+                        <li><strong>Pixabay:</strong> <a href="https://pixabay.com/images/search/cat/" target="_blank" style="color: white; text-decoration: underline;">pixabay.com</a></li>
+                    </ul>
+                    <p style="margin-top: 15px;"><strong>⚠️ Remember:</strong> Use royalty-free images, include proper alt text, keep file sizes reasonable!</p>
+                </div>
+            </section>
+            
+            <!-- COMMON MISTAKES SECTION -->
+            <section id="mistakes">
+                <h2>⚠️ Common Mistakes to Watch For</h2>
+                
+                <div class="warning-box">
+                    <h3>🐛 Top 10 Student Mistakes:</h3>
+                    <ol style="font-size: 1.05em; line-height: 2;">
+                        <li><strong>Forgetting closing tags</strong> - Every opening tag needs a closing tag (except self-closing tags like <code>&lt;img&gt;</code>)</li>
+                        <li><strong>Mixing up tag syntax</strong> - Closing tags have a forward slash: <code>&lt;/tag&gt;</code>, not <code>&lt;tag/&gt;</code></li>
+                        <li><strong>Not indenting code</strong> - Makes code hard to read, debug, and maintain</li>
+                        <li><strong>Skipping DOCTYPE</strong> - Always start with <code>&lt;!DOCTYPE html&gt;</code> at the very top</li>
+                        <li><strong>Using multiple <code>&lt;main&gt;</code> elements</strong> - Only ONE per page!</li>
+                        <li><strong>Missing alt text</strong> - Essential for accessibility and SEO</li>
+                        <li><strong>Incorrect heading hierarchy</strong> - Don't skip from h1 to h3; go in order</li>
+                        <li><strong>Forgetting quotes</strong> - Attribute values must be in quotes: <code>src="image.jpg"</code></li>
+                        <li><strong>Confusing block vs inline</strong> - Understanding element types prevents layout issues</li>
+                        <li><strong>Not validating HTML</strong> - Always use W3C Validator before submitting!</li>
+                    </ol>
+                </div>
+                
+                <h3>🔧 Debugging Tips</h3>
+                <div class="success-box">
+                    <ul style="font-size: 1.05em; line-height: 2;">
+                        <li>🔍 Check for missing or mismatched closing tags</li>
+                        <li>🔍 Look for typos in tag names and attribute names</li>
+                        <li>🔍 Verify all quotes are properly closed</li>
+                        <li>🔍 Ensure proper nesting (tags should close in reverse order of opening)</li>
+                        <li>🔍 Use W3C Validator to find syntax errors</li>
+                        <li>🔍 Check browser console for error messages</li>
+                        <li>🔍 Use browser DevTools to inspect the DOM</li>
+                        <li>🔍 Comment out sections to isolate problems</li>
+                        <li>🔍 Use a code editor with syntax highlighting</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <!-- RESOURCES SECTION -->
+            <section id="resources">
+                <h2>📚 Additional Resources</h2>
+                
+                <h3>🌐 Online Learning Platforms</h3>
+                <div class="grid-3">
+                    <div class="card">
+                        <h4>W3Schools</h4>
+                        <p><a href="https://www.w3schools.com/html/" target="_blank">w3schools.com/html</a></p>
+                        <p>Interactive tutorials, examples, and comprehensive reference materials.</p>
+                    </div>
+                    <div class="card">
+                        <h4>MDN Web Docs</h4>
+                        <p><a href="https://developer.mozilla.org/en-US/docs/Web/HTML" target="_blank">developer.mozilla.org</a></p>
+                        <p>Professional documentation from Mozilla, detailed and accurate.</p>
+                    </div>
+                    <div class="card">
+                        <h4>freeCodeCamp</h4>
+                        <p><a href="https://www.freecodecamp.org/" target="_blank">freecodecamp.org</a></p>
+                        <p>Free coding courses with hands-on projects and certifications.</p>
+                    </div>
+                    <div class="card">
+                        <h4>Codecademy</h4>
+                        <p><a href="https://www.codecademy.com/learn/learn-html" target="_blank">codecademy.com</a></p>
+                        <p>Interactive lessons with immediate feedback and practice.</p>
+                    </div>
+                    <div class="card">
+                        <h4>HTML Dog</h4>
+                        <p><a href="https://htmldog.com/" target="_blank">htmldog.com</a></p>
+                        <p>Straightforward tutorials for beginners through advanced.</p>
+                    </div>
+                    <div class="card">
+                        <h4>Khan Academy</h4>
+                        <p><a href="https://www.khanacademy.org/computing/computer-programming" target="_blank">khanacademy.org</a></p>
+                        <p>Video lessons and interactive coding challenges.</p>
+                    </div>
+                </div>
+                
+                <h3>🔧 Tools &amp; Validators</h3>
+                <table style="margin-top: 30px;">
+                    <thead>
+                        <tr>
+                            <th>Tool</th>
+                            <th>Purpose</th>
+                            <th>URL</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>W3C Markup Validator</strong></td>
+                            <td>Validate HTML syntax</td>
+                            <td><a href="https://validator.w3.org/" target="_blank">validator.w3.org</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Browser DevTools</strong></td>
+                            <td>Inspect and debug HTML</td>
+                            <td>Press F12 in most browsers</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Can I Use</strong></td>
+                            <td>Check browser compatibility</td>
+                            <td><a href="https://caniuse.com/" target="_blank">caniuse.com</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>HTML Color Picker</strong></td>
+                            <td>Choose colors for styling</td>
+                            <td><a href="https://htmlcolorcodes.com/" target="_blank">htmlcolorcodes.com</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>CodePen</strong></td>
+                            <td>Online code editor</td>
+                            <td><a href="https://codepen.io/" target="_blank">codepen.io</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <h3>📖 Practice &amp; Challenge Sites</h3>
+                <ul style="font-size: 1.1em; line-height: 2; margin-top: 20px;">
+                    <li><strong>Frontend Mentor:</strong> <a href="https://www.frontendmentor.io/" target="_blank">frontendmentor.io</a> - Real-world design challenges</li>
+                    <li><strong>Exercism:</strong> <a href="https://exercism.org/" target="_blank">exercism.org</a> - Coding exercises with mentorship</li>
+                    <li><strong>The Odin Project:</strong> <a href="https://www.theodinproject.com/" target="_blank">theodinproject.com</a> - Full curriculum for web development</li>
+                    <li><strong>100 Days CSS:</strong> <a href="https://100dayscss.com/" target="_blank">100dayscss.com</a> - Daily coding challenges</li>
+                </ul>
+            </section>
+            
+            <!-- QUICK REFERENCE SECTION -->
+            <section id="reference">
+                <h2>📋 Quick Reference Guide</h2>
+                
+                <h3>Essential HTML Tags</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Tag</th>
+                            <th>Purpose</th>
+                            <th>Example</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>&lt;h1&gt;</code> - <code>&lt;h6&gt;</code></td>
+                            <td>Headings (1 is largest/most important)</td>
+                            <td><code>&lt;h1&gt;Page Title&lt;/h1&gt;</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;p&gt;</code></td>
+                            <td>Paragraph of text</td>
+                            <td><code>&lt;p&gt;Text here&lt;/p&gt;</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;a&gt;</code></td>
+                            <td>Hyperlink</td>
+                            <td><code>&lt;a href="url"&gt;Link Text&lt;/a&gt;</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;img&gt;</code></td>
+                            <td>Image</td>
+                            <td><code>&lt;img src="pic.jpg" alt="description"&gt;</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;ul&gt;</code></td>
+                            <td>Unordered (bullet) list</td>
+                            <td><code>&lt;ul&gt;&lt;li&gt;Item&lt;/li&gt;&lt;/ul&gt;</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;ol&gt;</code></td>
+                            <td>Ordered (numbered) list</td>
+                            <td><code>&lt;ol&gt;&lt;li&gt;Item&lt;/li&gt;&lt;/ol&gt;</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;div&gt;</code></td>
+                            <td>Generic block container</td>
+                            <td><code>&lt;div&gt;Content&lt;/div&gt;</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;span&gt;</code></td>
+                            <td>Generic inline container</td>
+                            <td><code>&lt;span&gt;Text&lt;/span&gt;</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;strong&gt;</code></td>
+                            <td>Important text (bold)</td>
+                            <td><code>&lt;strong&gt;Bold&lt;/strong&gt;</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;em&gt;</code></td>
+                            <td>Emphasized text (italic)</td>
+                            <td><code>&lt;em&gt;Italic&lt;/em&gt;</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;br&gt;</code></td>
+                            <td>Line break</td>
+                            <td><code>Line 1&lt;br&gt;Line 2</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;hr&gt;</code></td>
+                            <td>Horizontal rule/separator</td>
+                            <td><code>&lt;hr&gt;</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <h3 style="margin-top: 50px;">Semantic HTML5 Tags</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Tag</th>
+                            <th>Purpose</th>
+                            <th>Best Used For</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>&lt;header&gt;</code></td>
+                            <td>Page or section header</td>
+                            <td>Logo, navigation, page title</td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;nav&gt;</code></td>
+                            <td>Navigation links</td>
+                            <td>Main menu, breadcrumbs, pagination</td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;main&gt;</code></td>
+                            <td>Primary page content</td>
+                            <td>Main content area (only one per page)</td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;section&gt;</code></td>
+                            <td>Thematic grouping of content</td>
+                            <td>Chapters, tabbed content, themed sections</td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;article&gt;</code></td>
+                            <td>Self-contained content</td>
+                            <td>Blog posts, news articles, forum posts</td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;aside&gt;</code></td>
+                            <td>Supplementary content</td>
+                            <td>Sidebars, related links, pull quotes</td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;footer&gt;</code></td>
+                            <td>Page or section footer</td>
+                            <td>Copyright, contact info, legal links</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            
+            <!-- TIPS FOR SUCCESS SECTION -->
+            <section id="tips">
+                <h2>💡 Tips for Success</h2>
+                
+                <div class="grid-3">
+                    <div class="card">
+                        <h4>✨ Start Simple</h4>
+                        <p>Don't try to build a complex site right away. Master the basics first, then gradually add more features.</p>
+                    </div>
+                    <div class="card">
+                        <h4>📝 Type It Yourself</h4>
+                        <p>Don't just copy and paste code. Type it out yourself to build muscle memory and understanding.</p>
+                    </div>
+                    <div class="card">
+                        <h4>🔍 Use DevTools</h4>
+                        <p>Browser developer tools (F12) are your best friend for learning and debugging.</p>
+                    </div>
+                    <div class="card">
+                        <h4>❓ Ask Questions</h4>
+                        <p>There are no dumb questions in coding. Every expert was once a beginner!</p>
+                    </div>
+                    <div class="card">
+                        <h4>🐛 Debug Patiently</h4>
+                        <p>Every developer makes mistakes. Debugging is a skill that improves with practice.</p>
+                    </div>
+                    <div class="card">
+                        <h4>💾 Save Often</h4>
+                        <p>Save your work frequently! Use version control (like Git) when you're ready.</p>
+                    </div>
+                    <div class="card">
+                        <h4>🎨 Be Creative</h4>
+                        <p>Make projects that interest you. You'll learn more when you're engaged.</p>
+                    </div>
+                    <div class="card">
+                        <h4>📚 Read Documentation</h4>
+                        <p>W3Schools and MDN are excellent resources. Get comfortable reading docs.</p>
+                    </div>
+                    <div class="card">
+                        <h4>🔄 Practice Daily</h4>
+                        <p>Consistency beats intensity. Code a little bit every day for best results.</p>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- NEXT STEPS SECTION -->
+            <section id="next-steps">
+                <h2>🚀 What's Next in Your Web Development Journey?</h2>
+                
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <h4>✅ Step 1: Master HTML (You Are Here!)</h4>
+                        <p>Learn structure, semantic tags, forms, and best practices. Complete projects and get comfortable with HTML syntax.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>🎨 Step 2: Learn CSS (Cascading Style Sheets)</h4>
+                        <p>Style your pages with colors, fonts, layouts, and animations. Learn about flexbox, grid, and responsive design.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>⚡ Step 3: Add JavaScript</h4>
+                        <p>Make your pages interactive with dynamic behavior, user input handling, and DOM manipulation.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>📱 Step 4: Responsive Design</h4>
+                        <p>Create websites that work perfectly on all devices - desktops, tablets, and mobile phones.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>🔧 Step 5: Advanced Topics</h4>
+                        <p>Frameworks (React, Vue), build tools, version control (Git), and modern web development practices.</p>
+                    </div>
+                </div>
+                
+                <div style="text-align: center; margin-top: 50px;">
+                    <a href="#objectives" class="btn">📚 Review Objectives</a>
+                    <a href="#activities" class="btn">🎯 Start Activities</a>
+                    <a href="https://validator.w3.org/" target="_blank" class="btn">✔️ Validate HTML</a>
+                </div>
+            </section>
+            
+            <!-- CONCLUSION SECTION -->
+            <section id="conclusion">
+                <h2>🎉 Congratulations!</h2>
+                
+                <div class="success-box">
+                    <h3 style="margin-top: 0;">You've Completed the Introduction to HTML Lesson!</h3>
+                    <p style="font-size: 1.15em; line-height: 2; margin-top: 25px;">
+                        You now know how to structure web pages using HTML, use semantic elements for better accessibility and SEO, add various content types with proper elements, and follow industry best practices. This is the foundation of all web development!
+                    </p>
+                    <p style="font-size: 1.1em; margin-top: 25px; font-weight: 600;">
+                        <strong>Remember:</strong> Every expert web developer was once exactly where you are now. Keep practicing, stay curious, experiment fearlessly, and don't be afraid to make mistakes - that's how you learn!
+                    </p>
+                </div>
+                
+                <h3 style="margin-top: 40px;">✅ Before You Go - Action Items:</h3>
+                <ul style="font-size: 1.1em; line-height: 2.2;">
+                    <li>✅ Complete your Song Lyric Page activity</li>
+                    <li>✅ Work on your About Me Page (due today)</li>
+                    <li>✅ Start the Cat Photo App homework (due next class)</li>
+                    <li>✅ Bookmark useful resources for future reference</li>
+                    <li>✅ Validate your HTML using W3C Validator</li>
+                    <li>✅ Practice with browser DevTools (Inspect Element)</li>
+                    <li>✅ Join online coding communities for support</li>
+                </ul>
+                
+                <div style="text-align: center; margin-top: 60px; padding: 50px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 15px; color: white; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
+                    <h3 style="color: white; font-size: 2.5em; margin-bottom: 25px;">Keep Coding! 💻✨</h3>
+                    <p style="font-size: 1.3em; line-height: 1.8;">The web is waiting for your amazing creations!</p>
+                    <p style="font-size: 1.1em; margin-top: 20px; opacity: 0.95;">Every line of code you write is a step toward becoming a skilled developer.</p>
+                </div>
+            </section>
+        </main>
+        
+        <footer>
+            <div style="max-width: 1200px; margin: 0 auto;">
+                <h3 style="margin-bottom: 25px; font-size: 2em;">📞 Contact &amp; Resources</h3>
+                <p style="font-size: 1.2em; margin: 15px 0;"><strong>Instructor:</strong> Patrick Porcuna</p>
+                <p style="font-size: 1.05em; margin: 15px 0;">For questions, clarifications, or additional help with assignments</p>
+                
+                <h4 style="margin-top: 40px; margin-bottom: 20px; color: white;">📚 Essential Links:</h4>
+                <p style="margin: 12px 0;">
+                    <a href="https://www.w3schools.com/html/" target="_blank">W3Schools HTML Tutorial</a> | 
+                    <a href="https://developer.mozilla.org/en-US/docs/Web/HTML" target="_blank">MDN Web Docs</a> | 
+                    <a href="https://validator.w3.org/" target="_blank">W3C HTML Validator</a> | 
+                    <a href="https://www.freecodecamp.org/" target="_blank">freeCodeCamp</a>
+                </p>
+                
+                <h4 style="margin-top: 30px; margin-bottom: 15px; color: white;">🎓 Keep Learning:</h4>
+                <p style="font-size: 1.05em; line-height: 2;">
+                    Practice daily, build projects you're passionate about, join coding communities, 
+                    and never stop exploring. The journey of learning web development is challenging 
+                    but incredibly rewarding!
+                </p>
+                
+                <div style="margin-top: 50px; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.3);">
+                    <p style="font-size: 1.05em; opacity: 0.9;">&copy; 2025 Introduction to HTML Lesson. All rights reserved.</p>
+                    <p style="margin-top: 15px; font-size: 1.1em;">Made with 💜 for aspiring web developers</p>
+                    <p style="margin-top: 10px; font-size: 1.2em; font-weight: 600;">Happy Coding! 🚀</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // Add copy buttons to all code blocks
+        document.querySelectorAll('pre code').forEach((block) => {
+            const button = document.createElement('button');
+            button.textContent = '📋 Copy';
+            button.className = 'copy-btn';
+            
+            const pre = block.parentElement;
+            pre.style.position = 'relative';
+            pre.appendChild(button);
+            
+            button.addEventListener('click', async () => {
+                try {
+                    await navigator.clipboard.writeText(block.textContent);
+                    button.textContent = '✅ Copied!';
+                    setTimeout(() => {
+                        button.textContent = '📋 Copy';
+                    }, 2000);
+                } catch (err) {
+                    button.textContent = '❌ Failed';
+                    setTimeout(() => {
+                        button.textContent = '📋 Copy';
+                    }, 2000);
+                }
+            });
+        });
+        
+        // Highlight current section in navigation
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('nav a');
+        
+        function highlightNav() {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop - 100) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        }
+        
+        window.addEventListener('scroll', highlightNav);
+        
+        // Add fade-in animation for sections
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        
+        sections.forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(20px)';
+            section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(section);
+        });
+        
+        // Initialize by showing first section
+        if (sections.length > 0) {
+            sections[0].style.opacity = '1';
+            sections[0].style.transform = 'translateY(0)';
+        }
+    </script>
+</body>
+</html>="#home"&gt;Home&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#services"&gt;Services&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#portfolio"&gt;Portfolio&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href
