@@ -1,0 +1,2026 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Basics - Complete Lesson by Patrick Porcuna</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.7;
+            color: #1a202c;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            padding: 20px 0;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 80px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: pulse 15s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        header h1 {
+            font-size: 4em;
+            margin-bottom: 15px;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+            position: relative;
+            z-index: 1;
+        }
+        
+        header .subtitle {
+            font-size: 1.5em;
+            opacity: 0.95;
+            margin-top: 10px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        nav {
+            background: #2d3748;
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        nav li {
+            margin: 0;
+        }
+        
+        nav a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 18px 24px;
+            font-weight: 600;
+            transition: all 0.3s;
+            border-bottom: 3px solid transparent;
+        }
+        
+        nav a:hover, nav a.active {
+            background: #f093fb;
+            border-bottom-color: #fbbf24;
+        }
+        
+        main {
+            padding: 60px 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        section {
+            margin-bottom: 80px;
+            scroll-margin-top: 80px;
+        }
+        
+        h2 {
+            color: #f5576c;
+            font-size: 2.8em;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 4px solid #f5576c;
+            position: relative;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 100px;
+            height: 4px;
+            background: #f093fb;
+        }
+        
+        h3 {
+            color: #f093fb;
+            font-size: 2em;
+            margin: 35px 0 20px;
+        }
+        
+        h4 {
+            color: #2d3748;
+            font-size: 1.4em;
+            margin: 25px 0 15px;
+        }
+        
+        p {
+            margin: 15px 0;
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+        
+        ul, ol {
+            margin: 20px 0;
+            padding-left: 40px;
+        }
+        
+        li {
+            margin: 12px 0;
+            font-size: 1.05em;
+            line-height: 1.7;
+        }
+        
+        .hero-box {
+            background: linear-gradient(135deg, #fce7f315 0%, #f5576c15 100%);
+            padding: 40px;
+            border-radius: 12px;
+            border-left: 6px solid #f5576c;
+            margin: 30px 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+        
+        .info-box {
+            background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+            border-left: 6px solid #0891b2;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .warning-box {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border-left: 6px solid #f59e0b;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .success-box {
+            background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+            border-left: 6px solid #10b981;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .danger-box {
+            background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+            border-left: 6px solid #ef4444;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        pre {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 25px;
+            border-radius: 10px;
+            overflow-x: auto;
+            margin: 25px 0;
+            border: 3px solid #475569;
+            position: relative;
+            font-size: 0.95em;
+            line-height: 1.6;
+        }
+        
+        code {
+            font-family: 'Courier New', 'Monaco', 'Consolas', monospace;
+        }
+        
+        .inline-code {
+            background: #f1f5f9;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            color: #e11d48;
+            font-size: 0.95em;
+            border: 1px solid #e2e8f0;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        th, td {
+            padding: 18px;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        th {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.9em;
+            letter-spacing: 0.5px;
+        }
+        
+        tr:nth-child(even) {
+            background: #f8fafc;
+        }
+        
+        tr:hover {
+            background: #fce7f3;
+            transition: background 0.3s;
+        }
+        
+        .demo-box {
+            border: 3px solid #e2e8f0;
+            padding: 30px;
+            margin: 25px 0;
+            border-radius: 10px;
+            background: #f8fafc;
+        }
+        
+        .demo-box h4 {
+            margin-top: 0;
+            color: #f5576c;
+        }
+        
+        .color-demo {
+            display: inline-block;
+            width: 80px;
+            height: 80px;
+            border-radius: 8px;
+            margin: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin: 30px 0;
+        }
+        
+        .comparison-item {
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .comparison-bad {
+            background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+            border: 3px solid #ef4444;
+        }
+        
+        .comparison-good {
+            background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+            border: 3px solid #10b981;
+        }
+        
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin: 30px 0;
+        }
+        
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border-top: 4px solid #f093fb;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+        
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 15px 35px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 700;
+            transition: all 0.3s;
+            margin: 12px 8px;
+            box-shadow: 0 4px 12px rgba(245, 87, 108, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 0.95em;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(245, 87, 108, 0.5);
+        }
+        
+        .copy-btn {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: #f093fb;
+            color: white;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85em;
+            font-weight: 600;
+            transition: all 0.3s;
+            z-index: 10;
+        }
+        
+        .copy-btn:hover {
+            background: #f5576c;
+            transform: scale(1.05);
+        }
+        
+        .activity-card {
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 12px;
+            margin: 40px 0;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .activity-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%);
+        }
+        
+        .activity-card h3 {
+            color: white;
+            margin-top: 0;
+            position: relative;
+        }
+        
+        .activity-card.purple {
+            background: linear-gradient(135deg, #a855f7 0%, #7c3aed 100%);
+        }
+        
+        .activity-card.pink {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+        
+        footer {
+            background: #1e293b;
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+        }
+        
+        footer a {
+            color: #93c5fd;
+            text-decoration: none;
+        }
+        
+        footer a:hover {
+            color: #60a5fa;
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 0;
+            }
+            
+            header h1 {
+                font-size: 2.5em;
+            }
+            
+            nav ul {
+                flex-direction: column;
+            }
+            
+            main {
+                padding: 40px 20px;
+            }
+            
+            .comparison, .grid-3 {
+                grid-template-columns: 1fr;
+            }
+            
+            .container {
+                border-radius: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎨 CSS BASICS</h1>
+            <p class="subtitle">by Patrick Porcuna</p>
+            <p class="subtitle" style="font-size: 1.2em; margin-top: 20px;">Cascading Style Sheets Fundamentals</p>
+        </header>
+        
+        <nav>
+            <ul>
+                <li><a href="#objectives">📚 Objectives</a></li>
+                <li><a href="#what-is-css">💡 What is CSS</a></li>
+                <li><a href="#syntax">🔧 Syntax</a></li>
+                <li><a href="#selectors">🎯 Selectors</a></li>
+                <li><a href="#properties">✨ Properties</a></li>
+                <li><a href="#box-model">📦 Box Model</a></li>
+                <li><a href="#layout">📐 Layout</a></li>
+                <li><a href="#responsive">📱 Responsive</a></li>
+                <li><a href="#activities">🎯 Activities</a></li>
+            </ul>
+        </nav>
+        
+        <main>
+            <!-- OBJECTIVES -->
+            <section id="objectives">
+                <h2>📚 Learning Objectives</h2>
+                <div class="hero-box">
+                    <h3 style="margin-top: 0; color: #f5576c;">By the end of this lesson, you will be able to:</h3>
+                    <ul style="font-size: 1.15em; line-height: 2;">
+                        <li>✅ Understand what CSS is and how it works with HTML</li>
+                        <li>✅ Write CSS rules using proper syntax</li>
+                        <li>✅ Use various CSS selectors to target elements</li>
+                        <li>✅ Apply colors, fonts, and spacing to style web pages</li>
+                        <li>✅ Understand the CSS Box Model</li>
+                        <li>✅ Create layouts using Flexbox and positioning</li>
+                        <li>✅ Make responsive designs for different screen sizes</li>
+                        <li>✅ Style your HTML projects beautifully</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <!-- WHAT IS CSS -->
+            <section id="what-is-css">
+                <h2>🤔 What is CSS?</h2>
+                
+                <div class="info-box">
+                    <h3 style="margin-top: 0; color: #0891b2;">CSS = Cascading Style Sheets</h3>
+                    <p style="font-size: 1.15em;"><strong>CSS is the styling language for the web.</strong> While HTML provides structure and content, CSS controls how that content looks - colors, fonts, layouts, spacing, animations, and more.</p>
+                    <p style="font-size: 1.1em; margin-top: 20px;">Think of HTML as the bones and CSS as the skin, clothes, and makeup that make everything look beautiful!</p>
+                </div>
+                
+                <h3>🎨 Why We Need CSS</h3>
+                <div class="grid-3">
+                    <div class="card">
+                        <h4>👁️ Visual Appeal</h4>
+                        <p>Make websites attractive, engaging, and professional-looking</p>
+                    </div>
+                    <div class="card">
+                        <h4>🎯 User Experience</h4>
+                        <p>Improve readability, navigation, and overall usability</p>
+                    </div>
+                    <div class="card">
+                        <h4>🏢 Branding</h4>
+                        <p>Apply consistent colors, fonts, and styles that match your brand</p>
+                    </div>
+                    <div class="card">
+                        <h4>📱 Responsiveness</h4>
+                        <p>Adapt layouts for different devices and screen sizes</p>
+                    </div>
+                    <div class="card">
+                        <h4>⚡ Performance</h4>
+                        <p>Separate content from presentation for better organization</p>
+                    </div>
+                    <div class="card">
+                        <h4>♿ Accessibility</h4>
+                        <p>Control contrast, sizing, and layout for better accessibility</p>
+                    </div>
+                </div>
+                
+                <h3>📊 HTML vs CSS - Side by Side</h3>
+                <div class="comparison">
+                    <div class="comparison-item" style="background: #f8fafc; border: 3px solid #cbd5e1;">
+                        <h4 style="color: #475569;">HTML Without CSS</h4>
+                        <div style="background: white; padding: 20px; border: 2px solid #e2e8f0; margin-top: 15px;">
+                            <h1 style="all: revert;">Welcome</h1>
+                            <p style="all: revert;">This is plain HTML with no styling.</p>
+                            <button style="all: revert;">Click Me</button>
+                        </div>
+                        <p style="margin-top: 15px; color: #64748b;">Basic, unstyled, black and white</p>
+                    </div>
+                    <div class="comparison-item" style="background: linear-gradient(135deg, #fce7f3 0%, #fbcfe8 100%); border: 3px solid #f093fb;">
+                        <h4 style="color: #f5576c;">HTML With CSS</h4>
+                        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 20px; border-radius: 10px; margin-top: 15px; color: white;">
+                            <h1 style="font-size: 2em; margin: 0 0 10px 0;">Welcome</h1>
+                            <p style="margin: 0 0 15px 0;">This is HTML with beautiful CSS styling!</p>
+                            <button style="background: #fbbf24; color: #1e293b; border: none; padding: 10px 20px; border-radius: 5px; font-weight: 600; cursor: pointer;">Click Me</button>
+                        </div>
+                        <p style="margin-top: 15px; color: #f5576c; font-weight: 600;">Colorful, styled, professional</p>
+                    </div>
+                </div>
+                
+                <h3>🔗 How CSS Connects to HTML</h3>
+                <p>There are three ways to add CSS to your HTML:</p>
+                
+                <h4>1. Inline CSS (Not Recommended)</h4>
+                <pre><code>&lt;p style="color: blue; font-size: 18px;"&gt;This is blue text.&lt;/p&gt;</code></pre>
+                <div class="warning-box">
+                    <p><strong>⚠️ Avoid inline styles!</strong> They mix content with presentation and are hard to maintain.</p>
+                </div>
+                
+                <h4>2. Internal CSS (For Single Pages)</h4>
+                <pre><code>&lt;head&gt;
+    &lt;style&gt;
+        p {
+            color: blue;
+            font-size: 18px;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;</code></pre>
+                
+                <h4>3. External CSS (Best Practice!) ✅</h4>
+                <pre><code>&lt;!-- In your HTML file --&gt;
+&lt;head&gt;
+    &lt;link rel="stylesheet" href="styles.css"&gt;
+&lt;/head&gt;
+
+/* In your styles.css file */
+p {
+    color: blue;
+    font-size: 18px;
+}</code></pre>
+                <div class="success-box">
+                    <p><strong>✅ Best Practice:</strong> Use external CSS files! This keeps your HTML clean, makes styles reusable, and is easier to maintain.</p>
+                </div>
+            </section>
+            
+            <!-- CSS SYNTAX -->
+            <section id="syntax">
+                <h2>🔧 CSS Syntax</h2>
+                
+                <h3>📖 Anatomy of a CSS Rule</h3>
+                <pre><code>selector {
+    property: value;
+    property: value;
+}</code></pre>
+                
+                <div class="demo-box">
+                    <h4>Real Example:</h4>
+                    <pre style="background: white; color: #1e293b; border: 2px solid #e2e8f0;"><code>h1 {
+    color: #f5576c;
+    font-size: 36px;
+    text-align: center;
+}</code></pre>
+                    <p style="margin-top: 20px;"><strong>Breaking it down:</strong></p>
+                    <ul>
+                        <li><span class="inline-code">h1</span> = <strong>Selector</strong> (what to style)</li>
+                        <li><span class="inline-code">{ }</span> = <strong>Declaration block</strong></li>
+                        <li><span class="inline-code">color</span>, <span class="inline-code">font-size</span>, <span class="inline-code">text-align</span> = <strong>Properties</strong></li>
+                        <li><span class="inline-code">#f5576c</span>, <span class="inline-code">36px</span>, <span class="inline-code">center</span> = <strong>Values</strong></li>
+                        <li><span class="inline-code">;</span> = Ends each declaration</li>
+                    </ul>
+                </div>
+                
+                <h3>💬 CSS Comments</h3>
+                <pre><code>/* This is a single-line comment */
+
+/*
+  This is a
+  multi-line comment
+*/
+
+h1 {
+    color: red; /* Inline comment */
+}</code></pre>
+                
+                <h3>✅ CSS Syntax Best Practices</h3>
+                <div class="comparison">
+                    <div class="comparison-item comparison-bad">
+                        <h4>❌ Bad - Hard to Read</h4>
+                        <pre style="background: white; color: #1e293b; border: 2px solid #e2e8f0;"><code>h1{color:red;font-size:24px;margin:0;}
+p{color:blue}</code></pre>
+                    </div>
+                    <div class="comparison-item comparison-good">
+                        <h4>✅ Good - Clean & Readable</h4>
+                        <pre style="background: white; color: #1e293b; border: 2px solid #e2e8f0;"><code>h1 {
+    color: red;
+    font-size: 24px;
+    margin: 0;
+}
+
+p {
+    color: blue;
+}</code></pre>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- SELECTORS -->
+            <section id="selectors">
+                <h2>🎯 CSS Selectors</h2>
+                
+                <p>Selectors are patterns that tell CSS which HTML elements to style. Let's explore the most important ones!</p>
+                
+                <h3>1. Element Selector</h3>
+                <p>Targets all elements of a specific type.</p>
+                <pre><code>/* Styles ALL paragraphs */
+p {
+    color: blue;
+}
+
+/* Styles ALL h1 headings */
+h1 {
+    font-size: 36px;
+}</code></pre>
+                
+                <h3>2. Class Selector (.)</h3>
+                <p>Targets elements with a specific class attribute. Classes can be reused on multiple elements.</p>
+                <pre><code>/* HTML */
+&lt;p class="highlight"&gt;This text is highlighted&lt;/p&gt;
+&lt;div class="highlight"&gt;This div is also highlighted&lt;/div&gt;
+
+/* CSS */
+.highlight {
+    background-color: yellow;
+    font-weight: bold;
+}</code></pre>
+                
+                <h3>3. ID Selector (#)</h3>
+                <p>Targets a single element with a specific ID. IDs should be unique on a page.</p>
+                <pre><code>/* HTML */
+&lt;div id="header"&gt;Main Header&lt;/div&gt;
+
+/* CSS */
+#header {
+    background-color: #f093fb;
+    padding: 20px;
+}</code></pre>
+                
+                <h3>4. Universal Selector (*)</h3>
+                <p>Targets ALL elements on the page.</p>
+                <pre><code>* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}</code></pre>
+                
+                <h3>5. Descendant Selector (space)</h3>
+                <p>Targets elements inside other elements.</p>
+                <pre><code>/* Targets paragraphs inside divs */
+div p {
+    color: green;
+}
+
+/* Targets links inside nav elements */
+nav a {
+    text-decoration: none;
+}</code></pre>
+                
+                <h3>6. Child Selector (>)</h3>
+                <p>Targets direct children only.</p>
+                <pre><code>/* Only direct paragraph children of div */
+div > p {
+    margin-bottom: 10px;
+}</code></pre>
+                
+                <h3>7. Multiple Selectors (,)</h3>
+                <p>Apply the same styles to multiple selectors.</p>
+                <pre><code>h1, h2, h3 {
+    font-family: Arial, sans-serif;
+    color: #2d3748;
+}</code></pre>
+                
+                <h3>8. Pseudo-classes (:)</h3>
+                <p>Target elements in specific states.</p>
+                <pre><code>/* When hovering over a link */
+a:hover {
+    color: red;
+}
+
+/* First child of a parent */
+li:first-child {
+    font-weight: bold;
+}
+
+/* Last child of a parent */
+li:last-child {
+    margin-bottom: 0;
+}
+
+/* Nth child */
+tr:nth-child(even) {
+    background-color: #f8fafc;
+}</code></pre>
+                
+                <h3>📊 Selector Specificity</h3>
+                <div class="info-box">
+                    <p><strong>When multiple rules target the same element, specificity determines which style wins!</strong></p>
+                    <p style="margin-top: 15px;"><strong>Specificity Hierarchy (from weakest to strongest):</strong></p>
+                    <ol style="font-size: 1.05em; line-height: 2; margin-top: 15px;">
+                        <li><strong>Element selectors</strong> - <span class="inline-code">p</span>, <span class="inline-code">div</span> (1 point)</li>
+                        <li><strong>Class selectors</strong> - <span class="inline-code">.classname</span> (10 points)</li>
+                        <li><strong>ID selectors</strong> - <span class="inline-code">#idname</span> (100 points)</li>
+                        <li><strong>Inline styles</strong> - <span class="inline-code">style="..."</span> (1000 points)</li>
+                        <li><strong>!important</strong> - Overrides everything (avoid using!)</li>
+                    </ol>
+                </div>
+            </section>
+            
+            <!-- CSS PROPERTIES -->
+            <section id="properties">
+                <h2>✨ Common CSS Properties</h2>
+                
+                <h3>🎨 Colors</h3>
+                <p>CSS supports multiple ways to define colors:</p>
+                
+                <pre><code>/* Named colors */
+color: red;
+background-color: blue;
+
+/* Hexadecimal */
+color: #f5576c;
+background-color: #f093fb;
+
+/* RGB */
+color: rgb(245, 87, 108);
+
+/* RGBA (with transparency) */
+background-color: rgba(240, 147, 251, 0.5);
+
+/* HSL */
+color: hsl(348, 90%, 65%);</code></pre>
+
+                <div class="demo-box">
+                    <h4>Color Examples:</h4>
+                    <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px;">
+                        <div style="text-align: center;">
+                            <div class="color-demo" style="background: #f5576c;"></div>
+                            <p style="margin: 5px 0; font-size: 0.9em;">#f5576c</p>
+                        </div>
+                        <div style="text-align: center;">
+                            <div class="color-demo" style="background: #f093fb;"></div>
+                            <p style="margin: 5px 0; font-size: 0.9em;">#f093fb</p>
+                        </div>
+                        <div style="text-align: center;">
+                            <div class="color-demo" style="background: #667eea;"></div>
+                            <p style="margin: 5px 0; font-size: 0.9em;">#667eea</p>
+                        </div>
+                        <div style="text-align: center;">
+                            <div class="color-demo" style="background: #fbbf24;"></div>
+                            <p style="margin: 5px 0; font-size: 0.9em;">#fbbf24</p>
+                        </div>
+                        <div style="text-align: center;">
+                            <div class="color-demo" style="background: #10b981;"></div>
+                            <p style="margin: 5px 0; font-size: 0.9em;">#10b981</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <h3>🔤 Typography</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Property</th>
+                            <th>Description</th>
+                            <th>Example Values</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>font-family</code></td>
+                            <td>Font typeface</td>
+                            <td>Arial, Georgia, sans-serif</td>
+                        </tr>
+                        <tr>
+                            <td><code>font-size</code></td>
+                            <td>Size of text</td>
+                            <td>16px, 1.5em, 1rem</td>
+                        </tr>
+                        <tr>
+                            <td><code>font-weight</code></td>
+                            <td>Boldness of text</td>
+                            <td>normal, bold, 400, 700</td>
+                        </tr>
+                        <tr>
+                            <td><code>font-style</code></td>
+                            <td>Text style</td>
+                            <td>normal, italic, oblique</td>
+                        </tr>
+                        <tr>
+                            <td><code>text-align</code></td>
+                            <td>Horizontal alignment</td>
+                            <td>left, center, right, justify</td>
+                        </tr>
+                        <tr>
+                            <td><code>text-decoration</code></td>
+                            <td>Text decorations</td>
+                            <td>none, underline, line-through</td>
+                        </tr>
+                        <tr>
+                            <td><code>text-transform</code></td>
+                            <td>Text casing</td>
+                            <td>uppercase, lowercase, capitalize</td>
+                        </tr>
+                        <tr>
+                            <td><code>line-height</code></td>
+                            <td>Space between lines</td>
+                            <td>1.5, 24px, 150%</td>
+                        </tr>
+                        <tr>
+                            <td><code>letter-spacing</code></td>
+                            <td>Space between letters</td>
+                            <td>1px, 0.05em</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <h4>Typography Example:</h4>
+                <pre><code>h1 {
+    font-family: 'Arial', sans-serif;
+    font-size: 36px;
+    font-weight: bold;
+    color: #f5576c;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+p {
+    font-family: Georgia, serif;
+    font-size: 18px;
+    line-height: 1.6;
+    color: #2d3748;
+}</code></pre>
+
+                <h3>📏 Spacing</h3>
+                <p>Control space inside and around elements:</p>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Property</th>
+                            <th>Description</th>
+                            <th>Example</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>margin</code></td>
+                            <td>Space outside element</td>
+                            <td><code>margin: 20px;</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>padding</code></td>
+                            <td>Space inside element</td>
+                            <td><code>padding: 15px;</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>margin-top</code></td>
+                            <td>Top margin only</td>
+                            <td><code>margin-top: 10px;</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>padding-left</code></td>
+                            <td>Left padding only</td>
+                            <td><code>padding-left: 20px;</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <h4>Spacing Shorthand:</h4>
+                <pre><code>/* All sides the same */
+margin: 20px;
+
+/* Top/Bottom | Left/Right */
+margin: 20px 40px;
+
+/* Top | Right | Bottom | Left (clockwise) */
+margin: 10px 20px 30px 40px;
+
+/* Individual sides */
+margin-top: 10px;
+margin-right: 20px;
+margin-bottom: 15px;
+margin-left: 25px;</code></pre>
+
+                <h3>🎨 Backgrounds</h3>
+                <pre><code>/* Solid color */
+background-color: #f093fb;
+
+/* Image */
+background-image: url('image.jpg');
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+
+/* Gradient */
+background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+
+/* Multiple backgrounds */
+background: 
+    url('pattern.png'),
+    linear-gradient(to right, #667eea, #764ba2);</code></pre>
+
+                <h3>🔲 Borders</h3>
+                <pre><code>/* Border shorthand: width style color */
+border: 2px solid #f5576c;
+
+/* Individual sides */
+border-top: 1px dashed blue;
+border-right: 3px dotted red;
+
+/* Rounded corners */
+border-radius: 10px;
+border-radius: 50%; /* Circle */
+
+/* Individual corner radius */
+border-top-left-radius: 10px;
+border-bottom-right-radius: 20px;</code></pre>
+
+                <h3>🌟 Display & Visibility</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Property</th>
+                            <th>Values</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>display</code></td>
+                            <td>block, inline, none, flex, grid</td>
+                            <td>How element is displayed</td>
+                        </tr>
+                        <tr>
+                            <td><code>visibility</code></td>
+                            <td>visible, hidden</td>
+                            <td>Show/hide (keeps space)</td>
+                        </tr>
+                        <tr>
+                            <td><code>opacity</code></td>
+                            <td>0 to 1</td>
+                            <td>Transparency level</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            
+            <!-- BOX MODEL -->
+            <section id="box-model">
+                <h2>📦 The CSS Box Model</h2>
+                
+                <div class="info-box">
+                    <h3 style="margin-top: 0; color: #0891b2;">What is the Box Model?</h3>
+                    <p style="font-size: 1.1em;">Every HTML element is a rectangular box. The CSS Box Model describes how these boxes are sized and how space around them is calculated.</p>
+                </div>
+                
+                <h3>🎯 The Four Parts of the Box Model</h3>
+                <pre><code>    ┌─────────────────────────────────┐
+    │         MARGIN (transparent)     │
+    │  ┌───────────────────────────┐  │
+    │  │    BORDER                 │  │
+    │  │  ┌─────────────────────┐  │  │
+    │  │  │   PADDING           │  │  │
+    │  │  │  ┌───────────────┐  │  │  │
+    │  │  │  │   CONTENT     │  │  │  │
+    │  │  │  │   (text/img)  │  │  │  │
+    │  │  │  └───────────────┘  │  │  │
+    │  │  └─────────────────────┘  │  │
+    │  └───────────────────────────┘  │
+    └─────────────────────────────────┘</code></pre>
+    
+                <div class="grid-3">
+                    <div class="card">
+                        <h4 style="color: #f5576c;">1. Content</h4>
+                        <p>The actual content of the element (text, images, etc.)</p>
+                        <p style="margin-top: 10px;"><code>width</code> and <code>height</code> control this</p>
+                    </div>
+                    <div class="card">
+                        <h4 style="color: #f5576c;">2. Padding</h4>
+                        <p>Space between content and border (inside the element)</p>
+                        <p style="margin-top: 10px;">Transparent, takes background color</p>
+                    </div>
+                    <div class="card">
+                        <h4 style="color: #f5576c;">3. Border</h4>
+                        <p>Line around padding and content</p>
+                        <p style="margin-top: 10px;">Can have color, width, and style</p>
+                    </div>
+                    <div class="card">
+                        <h4 style="color: #f5576c;">4. Margin</h4>
+                        <p>Space outside the border (between elements)</p>
+                        <p style="margin-top: 10px;">Always transparent</p>
+                    </div>
+                </div>
+                
+                <h3>📐 Box Model Example</h3>
+                <pre><code>.box {
+    /* Content size */
+    width: 300px;
+    height: 200px;
+    
+    /* Inside space */
+    padding: 20px;
+    
+    /* Border */
+    border: 5px solid #f5576c;
+    
+    /* Outside space */
+    margin: 30px;
+}
+
+/* Total width = width + padding + border + margin */
+/* Total width = 300 + 40 + 10 + 60 = 410px */</code></pre>
+
+                <h3>🎯 Box-Sizing Property</h3>
+                <div class="comparison">
+                    <div class="comparison-item" style="background: #fef3c7; border: 3px solid #f59e0b;">
+                        <h4 style="color: #92400e;">content-box (default)</h4>
+                        <pre style="background: white; color: #1e293b;"><code>.box {
+    box-sizing: content-box;
+    width: 300px;
+    padding: 20px;
+    border: 5px solid black;
+}
+
+/* Total width = 350px */
+/* 300 + 20 + 20 + 5 + 5 */</code></pre>
+                        <p style="margin-top: 15px;">Width/height applies to content only</p>
+                    </div>
+                    <div class="comparison-item comparison-good">
+                        <h4 style="color: #059669;">border-box (recommended!)</h4>
+                        <pre style="background: white; color: #1e293b;"><code>.box {
+    box-sizing: border-box;
+    width: 300px;
+    padding: 20px;
+    border: 5px solid black;
+}
+
+/* Total width = 300px */
+/* Padding and border included! */</code></pre>
+                        <p style="margin-top: 15px;">Width/height includes padding and border</p>
+                    </div>
+                </div>
+                
+                <div class="success-box">
+                    <h4>✅ Best Practice: Use border-box!</h4>
+                    <pre style="background: white; color: #1e293b; border: 2px solid #10b981;"><code>/* Apply to all elements */
+* {
+    box-sizing: border-box;
+}</code></pre>
+                    <p style="margin-top: 15px;">This makes sizing much more predictable and easier to work with!</p>
+                </div>
+            </section>
+            
+            <!-- LAYOUT -->
+            <section id="layout">
+                <h2>📐 CSS Layout</h2>
+                
+                <h3>🎯 Display Property</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Value</th>
+                            <th>Behavior</th>
+                            <th>Common Use</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>block</code></td>
+                            <td>Takes full width, starts on new line</td>
+                            <td>div, p, h1, section</td>
+                        </tr>
+                        <tr>
+                            <td><code>inline</code></td>
+                            <td>Takes only needed width, flows with text</td>
+                            <td>span, a, strong, em</td>
+                        </tr>
+                        <tr>
+                            <td><code>inline-block</code></td>
+                            <td>Inline but can have width/height</td>
+                            <td>Buttons, inline containers</td>
+                        </tr>
+                        <tr>
+                            <td><code>none</code></td>
+                            <td>Completely hidden, takes no space</td>
+                            <td>Hide elements dynamically</td>
+                        </tr>
+                        <tr>
+                            <td><code>flex</code></td>
+                            <td>Flexible container for layouts</td>
+                            <td>Modern layouts</td>
+                        </tr>
+                        <tr>
+                            <td><code>grid</code></td>
+                            <td>Grid-based layout system</td>
+                            <td>Complex 2D layouts</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <h3>💪 Flexbox Layout</h3>
+                <p>Flexbox is a powerful, modern way to create flexible layouts. It's perfect for one-dimensional layouts (rows or columns).</p>
+                
+                <h4>Basic Flexbox Setup:</h4>
+                <pre><code>/* Container (parent) */
+.container {
+    display: flex;
+    justify-content: center; /* Horizontal alignment */
+    align-items: center; /* Vertical alignment */
+    gap: 20px; /* Space between items */
+}
+
+/* Items (children) automatically become flex items */</code></pre>
+
+                <h4>Flexbox Container Properties:</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Property</th>
+                            <th>Values</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>flex-direction</code></td>
+                            <td>row, column, row-reverse, column-reverse</td>
+                            <td>Direction of flex items</td>
+                        </tr>
+                        <tr>
+                            <td><code>justify-content</code></td>
+                            <td>flex-start, center, flex-end, space-between, space-around</td>
+                            <td>Horizontal alignment</td>
+                        </tr>
+                        <tr>
+                            <td><code>align-items</code></td>
+                            <td>flex-start, center, flex-end, stretch</td>
+                            <td>Vertical alignment</td>
+                        </tr>
+                        <tr>
+                            <td><code>flex-wrap</code></td>
+                            <td>nowrap, wrap, wrap-reverse</td>
+                            <td>Whether items wrap to new line</td>
+                        </tr>
+                        <tr>
+                            <td><code>gap</code></td>
+                            <td>10px, 1rem, etc.</td>
+                            <td>Space between items</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <h4>Flexbox Examples:</h4>
+                <pre><code>/* Center content horizontally and vertically */
+.center-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Create a navigation bar */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+}
+
+/* Create a card grid */
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.card {
+    flex: 1 1 300px; /* Grow, shrink, base width */
+}</code></pre>
+
+                <h3>📍 Positioning</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Position</th>
+                            <th>Behavior</th>
+                            <th>Use Case</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>static</code></td>
+                            <td>Default, normal flow</td>
+                            <td>Most elements</td>
+                        </tr>
+                        <tr>
+                            <td><code>relative</code></td>
+                            <td>Relative to original position</td>
+                            <td>Slight adjustments</td>
+                        </tr>
+                        <tr>
+                            <td><code>absolute</code></td>
+                            <td>Relative to positioned parent</td>
+                            <td>Overlays, tooltips</td>
+                        </tr>
+                        <tr>
+                            <td><code>fixed</code></td>
+                            <td>Relative to viewport</td>
+                            <td>Sticky headers, floating buttons</td>
+                        </tr>
+                        <tr>
+                            <td><code>sticky</code></td>
+                            <td>Relative until scroll threshold</td>
+                            <td>Sticky navigation</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <h4>Positioning Examples:</h4>
+                <pre><code>/* Fixed header */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: white;
+    z-index: 1000;
+}
+
+/* Sticky navigation */
+nav {
+    position: sticky;
+    top: 0;
+    background: white;
+}
+
+/* Centered modal */
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 40px;
+    border-radius: 10px;
+}</code></pre>
+            </section>
+            
+            <!-- RESPONSIVE DESIGN -->
+            <section id="responsive">
+                <h2>📱 Responsive Design</h2>
+                
+                <div class="info-box">
+                    <h3 style="margin-top: 0; color: #0891b2;">What is Responsive Design?</h3>
+                    <p style="font-size: 1.1em;">Responsive design ensures your website looks great and functions well on all devices - desktops, tablets, and mobile phones.</p>
+                </div>
+                
+                <h3>🎯 Media Queries</h3>
+                <p>Media queries let you apply different styles based on screen size, device type, and other characteristics.</p>
+                
+                <h4>Basic Syntax:</h4>
+                <pre><code>@media (max-width: 768px) {
+    /* Styles for screens 768px and smaller */
+    .container {
+        flex-direction: column;
+    }
+}</code></pre>
+
+                <h4>Common Breakpoints:</h4>
+                <pre><code>/* Mobile devices */
+@media (max-width: 480px) {
+    body {
+        font-size: 14px;
+    }
+}
+
+/* Tablets */
+@media (max-width: 768px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Small laptops */
+@media (max-width: 1024px) {
+    .container {
+        padding: 20px;
+    }
+}
+
+/* Desktops */
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1400px;
+    }
+}</code></pre>
+
+                <h3>📐 Responsive Units</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Unit</th>
+                            <th>Description</th>
+                            <th>Example</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>px</code></td>
+                            <td>Fixed pixels</td>
+                            <td><code>font-size: 16px;</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>%</code></td>
+                            <td>Relative to parent</td>
+                            <td><code>width: 50%;</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>em</code></td>
+                            <td>Relative to parent font-size</td>
+                            <td><code>padding: 1.5em;</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>rem</code></td>
+                            <td>Relative to root font-size</td>
+                            <td><code>margin: 2rem;</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>vw</code></td>
+                            <td>Viewport width (1vw = 1% of viewport width)</td>
+                            <td><code>width: 50vw;</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>vh</code></td>
+                            <td>Viewport height (1vh = 1% of viewport height)</td>
+                            <td><code>height: 100vh;</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <h3>✅ Responsive Design Best Practices</h3>
+                <div class="success-box">
+                    <ul style="font-size: 1.05em; line-height: 2;">
+                        <li>✅ <strong>Mobile-first approach:</strong> Design for mobile, then scale up</li>
+                        <li>✅ <strong>Use flexible units:</strong> %, rem, vw/vh instead of fixed px</li>
+                        <li>✅ <strong>Flexible images:</strong> <code>max-width: 100%;</code> on images</li>
+                        <li>✅ <strong>Test on real devices:</strong> Don't just rely on browser tools</li>
+                        <li>✅ <strong>Touch-friendly:</strong> Make buttons large enough to tap (44x44px minimum)</li>
+                        <li>✅ <strong>Readable text:</strong> Minimum 16px font-size on mobile</li>
+                    </ul>
+                </div>
+                
+                <h4>Mobile-First Example:</h4>
+                <pre><code>/* Base styles (mobile) */
+.container {
+    padding: 15px;
+    font-size: 16px;
+}
+
+.grid {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Tablet and up */
+@media (min-width: 768px) {
+    .container {
+        padding: 30px;
+    }
+    
+    .grid {
+        flex-direction: row;
+        gap: 25px;
+    }
+}
+
+/* Desktop and up */
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 60px;
+    }
+}</code></pre>
+            </section>
+            
+            <!-- ACTIVITIES -->
+            <section id="activities">
+                <h2>🎯 CSS Activities & Projects</h2>
+                
+                <div class="activity-card">
+                    <h3>🎨 Activity 1: Style Your Song Lyric Page</h3>
+                    <p style="position: relative;"><strong>⏱️ Time:</strong> 20 minutes</p>
+                    <p style="font-size: 1.1em; margin: 15px 0; position: relative;"><strong>Task:</strong> Take your HTML Song Lyric Page and make it beautiful with CSS!</p>
+                    
+                    <h4 style="color: white; position: relative;">📋 Requirements:</h4>
+                    <ul style="font-size: 1.05em; line-height: 2; position: relative;">
+                        <li>✅ Create an external CSS file (style.css)</li>
+                        <li>✅ Choose a color scheme (background, text colors)</li>
+                        <li>✅ Style the song title (h1) - make it stand out!</li>
+                        <li>✅ Style the artist name (h2)</li>
+                        <li>✅ Format the verses with proper spacing</li>
+                        <li>✅ Add padding and margins for better readability</li>
+                        <li>✅ Center the content or create an interesting layout</li>
+                        <li>✅ Use at least 3 different font properties</li>
+                        <li>✅ Add a border or background to sections</li>
+                        <li>✅ Make text emphasized words visually distinct</li>
+                    </ul>
+                    
+                    <h4 style="color: white; margin-top: 25px; position: relative;">💡 Bonus Challenges:</h4>
+                    <ul style="line-height: 1.9; position: relative;">
+                        <li>🎯 Add a background image or gradient</li>
+                        <li>🎯 Create hover effects on text</li>
+                        <li>🎯 Use Google Fonts for custom typography</li>
+                        <li>🎯 Add subtle shadows to elements</li>
+                    </ul>
+                </div>
+                
+                <div class="activity-card purple">
+                    <h3>✨ Activity 2: Style Your About Me Page</h3>
+                    <p style="position: relative;"><strong>⏱️ Time:</strong> 30-40 minutes</p>
+                    <p style="font-size: 1.1em; margin: 15px 0; position: relative;"><strong>Task:</strong> Transform your About Me page into a professional portfolio!</p>
+                    
+                    <h4 style="color: white; position: relative;">📋 Requirements:</h4>
+                    <ul style="font-size: 1.05em; line-height: 2; position: relative;">
+                        <li>✅ External CSS file with organized sections</li>
+                        <li>✅ Professional color scheme (3-5 colors max)</li>
+                        <li>✅ Styled header with your name prominently displayed</li>
+                        <li>✅ Navigation styling (if you have links)</li>
+                        <li>✅ Card-style sections with borders/shadows</li>
+                        <li>✅ Properly sized and styled images</li>
+                        <li>✅ Styled lists with custom bullets or numbers</li>
+                        <li>✅ Styled links with hover effects</li>
+                        <li>✅ Consistent spacing throughout (padding/margins)</li>
+                        <li>✅ Footer with centered content</li>
+                        <li>✅ Use Flexbox for at least one layout</li>
+                    </ul>
+                    
+                    <h4 style="color: white; margin-top: 25px; position: relative;">🏆 Grading Rubric (100 points):</h4>
+                    <table style="width: 100%; margin-top: 20px; background: white; color: #1a202c; position: relative;">
+                        <thead>
+                            <tr>
+                                <th>Category</th>
+                                <th>Points</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>CSS Organization</strong></td>
+                                <td>15</td>
+                                <td>Clean, commented, external file</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Color & Typography</strong></td>
+                                <td>25</td>
+                                <td>Professional color scheme, readable fonts</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Layout & Spacing</strong></td>
+                                <td>25</td>
+                                <td>Proper use of box model, flexbox</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Visual Design</strong></td>
+                                <td>20</td>
+                                <td>Attractive, cohesive design</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Creativity</strong></td>
+                                <td>15</td>
+                                <td>Unique design choices, extras</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="activity-card pink">
+                    <h3>🐱 Homework: Style Your Cat Photo App</h3>
+                    <p style="position: relative;"><strong>📅 Due:</strong> Next class session</p>
+                    <p style="font-size: 1.1em; margin: 15px 0; position: relative;"><strong>Task:</strong> Make your Cat Photo App visually stunning with professional CSS!</p>
+                    
+                    <h4 style="color: white; position: relative;">📋 Requirements:</h4>
+                    <ul style="font-size: 1.05em; line-height: 2; position: relative;">
+                        <li>✅ External CSS file with clear organization</li>
+                        <li>✅ Cat-themed color palette (think: orange, cream, brown, playful colors)</li>
+                        <li>✅ Responsive layout that works on mobile and desktop</li>
+                        <li>✅ Styled navigation menu</li>
+                        <li>✅ Photo gallery using Flexbox or Grid</li>
+                        <li>✅ Image hover effects (scale, shadow, overlay)</li>
+                        <li>✅ Styled buttons and links</li>
+                        <li>✅ Card-style sections for different content</li>
+                        <li>✅ Custom styling for lists</li>
+                        <li>✅ Professional footer design</li>
+                        <li>✅ At least one media query for responsive design</li>
+                        <li>✅ Smooth transitions on interactive elements</li>
+                    </ul>
+                    
+                    <h4 style="color: white; margin-top: 25px; position: relative;">🌟 Stretch Goals (Extra Credit):</h4>
+                    <ul style="line-height: 1.9; position: relative;">
+                        <li>🎯 Create an animated header or title</li>
+                        <li>🎯 Add a sticky navigation bar</li>
+                        <li>🎯 Create a lightbox effect for images</li>
+                        <li>🎯 Use CSS animations or transitions creatively</li>
+                        <li>🎯 Implement dark mode toggle styles</li>
+                        <li>🎯 Create a fully responsive 3-column grid layout</li>
+                        <li>🎯 Add gradient backgrounds or patterns</li>
+                    </ul>
+                    
+                    <h4 style="color: white; margin-top: 25px; position: relative;">💡 Design Inspiration:</h4>
+                    <ul style="line-height: 1.9; position: relative;">
+                        <li>🎨 Look at professional pet websites for inspiration</li>
+                        <li>🎨 Use color palette generators (coolors.co, colorhunt.co)</li>
+                        <li>🎨 Check out Google Fonts for fun, cat-themed fonts</li>
+                        <li>🎨 Pinterest and Dribbble for design ideas</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <!-- ADVANCED TOPICS -->
+            <section id="advanced">
+                <h2>🚀 Advanced CSS Topics (Preview)</h2>
+                
+                <p>Here are some advanced CSS topics you'll learn as you continue your journey:</p>
+                
+                <div class="grid-3">
+                    <div class="card">
+                        <h4>🎬 Animations</h4>
+                        <pre style="font-size: 0.85em; background: #1e293b; color: #e2e8f0; padding: 15px; border-radius: 8px;"><code>@keyframes slide {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(100px);
+    }
+}
+
+.box {
+    animation: slide 2s infinite;
+}</code></pre>
+                    </div>
+                    <div class="card">
+                        <h4>🔄 Transitions</h4>
+                        <pre style="font-size: 0.85em; background: #1e293b; color: #e2e8f0; padding: 15px; border-radius: 8px;"><code>.button {
+    background: #f093fb;
+    transition: all 0.3s ease;
+}
+
+.button:hover {
+    background: #f5576c;
+    transform: scale(1.1);
+}</code></pre>
+                    </div>
+                    <div class="card">
+                        <h4>📐 CSS Grid</h4>
+                        <pre style="font-size: 0.85em; background: #1e293b; color: #e2e8f0; padding: 15px; border-radius: 8px;"><code>.grid {
+    display: grid;
+    grid-template-columns: 
+        repeat(3, 1fr);
+    gap: 20px;
+}</code></pre>
+                    </div>
+                    <div class="card">
+                        <h4>🎭 Transforms</h4>
+                        <pre style="font-size: 0.85em; background: #1e293b; color: #e2e8f0; padding: 15px; border-radius: 8px;"><code>.card:hover {
+    transform: 
+        rotate(5deg) 
+        scale(1.05);
+}</code></pre>
+                    </div>
+                    <div class="card">
+                        <h4>🌈 Variables</h4>
+                        <pre style="font-size: 0.85em; background: #1e293b; color: #e2e8f0; padding: 15px; border-radius: 8px;"><code>:root {
+    --primary: #f093fb;
+    --secondary: #f5576c;
+}
+
+.button {
+    background: var(--primary);
+}</code></pre>
+                    </div>
+                    <div class="card">
+                        <h4>🎨 Filters</h4>
+                        <pre style="font-size: 0.85em; background: #1e293b; color: #e2e8f0; padding: 15px; border-radius: 8px;"><code>img:hover {
+    filter: 
+        brightness(1.2)
+        contrast(1.1)
+        saturate(1.3);
+}</code></pre>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- BEST PRACTICES -->
+            <section id="best-practices">
+                <h2>✅ CSS Best Practices</h2>
+                
+                <div class="success-box">
+                    <h3 style="margin-top: 0;">📋 CSS Coding Standards</h3>
+                    <ul style="font-size: 1.05em; line-height: 2;">
+                        <li>✅ <strong>Use external stylesheets</strong> - Keep CSS separate from HTML</li>
+                        <li>✅ <strong>Organize your CSS</strong> - Group related styles, use comments</li>
+                        <li>✅ <strong>Use meaningful class names</strong> - .btn-primary, not .blue-thing</li>
+                        <li>✅ <strong>Avoid !important</strong> - Use proper specificity instead</li>
+                        <li>✅ <strong>Mobile-first approach</strong> - Design for mobile, scale up</li>
+                        <li>✅ <strong>Use shorthand properties</strong> - margin: 10px 20px vs individual properties</li>
+                        <li>✅ <strong>Keep selectors simple</strong> - Don't nest too deeply</li>
+                        <li>✅ <strong>Use consistent naming</strong> - Pick a convention (BEM, etc.) and stick to it</li>
+                        <li>✅ <strong>Comment your code</strong> - Explain complex or non-obvious styles</li>
+                        <li>✅ <strong>Test across browsers</strong> - Check Chrome, Firefox, Safari</li>
+                    </ul>
+                </div>
+                
+                <h3>🗂️ CSS Organization Example</h3>
+                <pre><code>/* ================================
+   CSS FILE STRUCTURE
+   ================================ */
+
+/* 1. RESET/NORMALIZE */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* 2. VARIABLES (if using) */
+:root {
+    --primary-color: #f093fb;
+    --secondary-color: #f5576c;
+    --text-color: #2d3748;
+    --spacing: 20px;
+}
+
+/* 3. TYPOGRAPHY */
+body {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--text-color);
+}
+
+h1, h2, h3 {
+    margin-bottom: 1rem;
+}
+
+/* 4. LAYOUT */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* 5. COMPONENTS */
+.button {
+    padding: 10px 20px;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+/* 6. UTILITIES */
+.text-center { text-align: center; }
+.mt-20 { margin-top: 20px; }
+.mb-20 { margin-bottom: 20px; }
+
+/* 7. RESPONSIVE */
+@media (max-width: 768px) {
+    .container {
+        padding: 0 10px;
+    }
+}</code></pre>
+            </section>
+            
+            <!-- RESOURCES -->
+            <section id="resources">
+                <h2>📚 CSS Resources</h2>
+                
+                <h3>🌐 Learning Resources</h3>
+                <div class="grid-3">
+                    <div class="card">
+                        <h4>MDN Web Docs</h4>
+                        <p><a href="https://developer.mozilla.org/en-US/docs/Web/CSS" target="_blank">developer.mozilla.org/CSS</a></p>
+                        <p>Comprehensive CSS documentation</p>
+                    </div>
+                    <div class="card">
+                        <h4>CSS-Tricks</h4>
+                        <p><a href="https://css-tricks.com/" target="_blank">css-tricks.com</a></p>
+                        <p>Tutorials, articles, and tips</p>
+                    </div>
+                    <div class="card">
+                        <h4>W3Schools CSS</h4>
+                        <p><a href="https://www.w3schools.com/css/" target="_blank">w3schools.com/css</a></p>
+                        <p>Interactive tutorials and examples</p>
+                    </div>
+                    <div class="card">
+                        <h4>Flexbox Froggy</h4>
+                        <p><a href="https://flexboxfroggy.com/" target="_blank">flexboxfroggy.com</a></p>
+                        <p>Learn Flexbox with a fun game!</p>
+                    </div>
+                    <div class="card">
+                        <h4>Grid Garden</h4>
+                        <p><a href="https://cssgridgarden.com/" target="_blank">cssgridgarden.com</a></p>
+                        <p>Learn CSS Grid through gameplay</p>
+                    </div>
+                    <div class="card">
+                        <h4>CSS Battle</h4>
+                        <p><a href="https://cssbattle.dev/" target="_blank">cssbattle.dev</a></p>
+                        <p>Practice CSS with challenges</p>
+                    </div>
+                </div>
+                
+                <h3>🎨 Design Tools</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Tool</th>
+                            <th>Purpose</th>
+                            <th>URL</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Coolors</strong></td>
+                            <td>Color palette generator</td>
+                            <td><a href="https://coolors.co/" target="_blank">coolors.co</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Google Fonts</strong></td>
+                            <td>Free web fonts</td>
+                            <td><a href="https://fonts.google.com/" target="_blank">fonts.google.com</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>CSS Gradient</strong></td>
+                            <td>Gradient generator</td>
+                            <td><a href="https://cssgradient.io/" target="_blank">cssgradient.io</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Box Shadow Generator</strong></td>
+                            <td>Create box shadows</td>
+                            <td><a href="https://cssgenerator.org/box-shadow-css-generator.html" target="_blank">cssgenerator.org</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Can I Use</strong></td>
+                            <td>Browser compatibility</td>
+                            <td><a href="https://caniuse.com/" target="_blank">caniuse.com</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            
+            <!-- COMMON MISTAKES -->
+            <section id="mistakes">
+                <h2>⚠️ Common CSS Mistakes</h2>
+                
+                <div class="warning-box">
+                    <h3 style="margin-top: 0;">🐛 Top 10 CSS Mistakes to Avoid</h3>
+                    <ol style="font-size: 1.05em; line-height: 2;">
+                        <li><strong>Not using external stylesheets</strong> - Keep CSS separate from HTML!</li>
+                        <li><strong>Overusing !important</strong> - This breaks the cascade; fix specificity instead</li>
+                        <li><strong>Not using box-sizing: border-box</strong> - Makes sizing unpredictable</li>
+                        <li><strong>Forgetting to reset/normalize CSS</strong> - Browsers have different defaults</li>
+                        <li><strong>Using too many specific selectors</strong> - Keep selectors simple and reusable</li>
+                        <li><strong>Not testing on different browsers</strong> - Always check cross-browser compatibility</li>
+                        <li><strong>Hardcoding values everywhere</strong> - Use variables for consistency</li>
+                        <li><strong>Not organizing CSS logically</strong> - Group related styles together</li>
+                        <li><strong>Ignoring mobile devices</strong> - Always design responsively</li>
+                        <li><strong>Not commenting complex code</strong> - Future you will thank present you!</li>
+                    </ol>
+                </div>
+                
+                <h3>🔧 Debugging CSS Tips</h3>
+                <div class="success-box">
+                    <ul style="font-size: 1.05em; line-height: 2;">
+                        <li>🔍 Use browser DevTools (F12) to inspect elements</li>
+                        <li>🔍 Check the computed styles panel to see final values</li>
+                        <li>🔍 Use border or background colors temporarily to see element boundaries</li>
+                        <li>🔍 Comment out sections to isolate problems</li>
+                        <li>🔍 Validate your CSS at <a href="https://jigsaw.w3.org/css-validator/" target="_blank">jigsaw.w3.org/css-validator</a></li>
+                        <li>🔍 Check specificity when styles aren't applying</li>
+                        <li>🔍 Look for typos in property names or values</li>
+                        <li>🔍 Make sure files are linked correctly</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <!-- CONCLUSION -->
+            <section id="conclusion">
+                <h2>🎉 You've Learned CSS Basics!</h2>
+                
+                <div class="success-box">
+                    <h3 style="margin-top: 0;">What You Now Know:</h3>
+                    <ul style="font-size: 1.1em; line-height: 2;">
+                        <li>✅ What CSS is and how it works with HTML</li>
+                        <li>✅ CSS syntax and how to write rules</li>
+                        <li>✅ Different types of selectors and when to use them</li>
+                        <li>✅ How to style text, colors, and backgrounds</li>
+                        <li>✅ The CSS Box Model and how spacing works</li>
+                        <li>✅ Layout techniques including Flexbox</li>
+                        <li>✅ How to make responsive designs</li>
+                        <li>✅ Best practices for writing clean CSS</li>
+                    </ul>
+                </div>
+                
+                <h3>🚀 Next Steps in Your CSS Journey</h3>
+                <div class="grid-3">
+                    <div class="card">
+                        <h4>🎨 Practice Daily</h4>
+                        <p>Style different HTML elements every day. Try recreating websites you like.</p>
+                    </div>
+                    <div class="card">
+                        <h4>📐 Master Flexbox & Grid</h4>
+                        <p>These are essential for modern layouts. Play Flexbox Froggy and Grid Garden!</p>
+                    </div>
+                    <div class="card">
+                        <h4>🎬 Learn Animations</h4>
+                        <p>Add life to your pages with CSS transitions and keyframe animations.</p>
+                    </div>
+                    <div class="card">
+                        <h4>🎯 Build Projects</h4>
+                        <p>Create portfolio pieces: landing pages, photo galleries, portfolios.</p>
+                    </div>
+                    <div class="card">
+                        <h4>👀 Study Great Designs</h4>
+                        <p>Look at websites you admire and try to recreate elements.</p>
+                    </div>
+                    <div class="card">
+                        <h4>📚 Keep Learning</h4>
+                        <p>CSS is constantly evolving. Follow CSS blogs and try new features.</p>
+                    </div>
+                </div>
+                
+                <h3 style="margin-top: 40px;">✅ Before You Go - Action Items:</h3>
+                <ul style="font-size: 1.1em; line-height: 2.2;">
+                    <li>✅ Complete Activity 1: Style your Song Lyric Page</li>
+                    <li>✅ Complete Activity 2: Style your About Me Page</li>
+                    <li>✅ Start Homework: Style your Cat Photo App</li>
+                    <li>✅ Bookmark CSS resources and tools</li>
+                    <li>✅ Play Flexbox Froggy to practice layouts</li>
+                    <li>✅ Experiment with colors and typography</li>
+                    <li>✅ Join CSS communities for inspiration</li>
+                </ul>
+                
+                <div style="text-align: center; margin-top: 60px; padding: 50px; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); border-radius: 15px; color: white; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
+                    <h3 style="color: white; font-size: 2.5em; margin-bottom: 25px;">Keep Styling! 🎨✨</h3>
+                    <p style="font-size: 1.3em; line-height: 1.8;">CSS is where creativity meets code!</p>
+                    <p style="font-size: 1.1em; margin-top: 20px; opacity: 0.95;">Every beautiful website starts with great CSS.</p>
+                </div>
+            </section>
+        </main>
+        
+        <footer>
+            <div style="max-width: 1200px; margin: 0 auto;">
+                <h3 style="margin-bottom: 25px; font-size: 2em;">📞 Contact & Resources</h3>
+                <p style="font-size: 1.2em; margin: 15px 0;"><strong>Instructor:</strong> Patrick Porcuna</p>
+                
+                <h4 style="margin-top: 40px; margin-bottom: 20px; color: white;">🎨 Essential CSS Links:</h4>
+                <p style="margin: 12px 0;">
+                    <a href="https://developer.mozilla.org/en-US/docs/Web/CSS" target="_blank">MDN CSS Docs</a> | 
+                    <a href="https://css-tricks.com/" target="_blank">CSS-Tricks</a> | 
+                    <a href="https://www.w3schools.com/css/" target="_blank">W3Schools CSS</a> | 
+                    <a href="https://flexboxfroggy.com/" target="_blank">Flexbox Froggy</a> | 
+                    <a href="https://cssgridgarden.com/" target="_blank">Grid Garden</a>
+                </p>
+                
+                <h4 style="margin-top: 30px; margin-bottom: 15px; color: white;">🎓 Design Tools:</h4>
+                <p style="margin: 12px 0;">
+                    <a href="https://coolors.co/" target="_blank">Coolors</a> | 
+                    <a href="https://fonts.google.com/" target="_blank">Google Fonts</a> | 
+                    <a href="https://cssgradient.io/" target="_blank">CSS Gradient</a> | 
+                    <a href="https://caniuse.com/" target="_blank">Can I Use</a>
+                </p>
+                
+                <div style="margin-top: 50px; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.3);">
+                    <p style="font-size: 1.05em; opacity: 0.9;">&copy; 2025 CSS Basics Lesson. All rights reserved.</p>
+                    <p style="margin-top: 15px; font-size: 1.1em;">Made with 💖 for aspiring web designers</p>
+                    <p style="margin-top: 10px; font-size: 1.2em; font-weight: 600;">Happy Styling! 🎨</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+        
+        // Copy buttons for code blocks
+        document.querySelectorAll('pre code').forEach((block) => {
+            const button = document.createElement('button');
+            button.textContent = '📋 Copy';
+            button.className = 'copy-btn';
+            block.parentElement.appendChild(button);
+            
+            button.addEventListener('click', async () => {
+                try {
+                    await navigator.clipboard.writeText(block.textContent);
+                    button.textContent = '✅ Copied!';
+                    setTimeout(() => button.textContent = '📋 Copy', 2000);
+                } catch (err) {
+                    button.textContent = '❌ Failed';
+                    setTimeout(() => button.textContent = '📋 Copy', 2000);
+                }
+            });
+        });
+        
+        // Active nav highlighting
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('nav a');
+        
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 100) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+        
+        // Fade-in animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        sections.forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(20px)';
+            section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(section);
+        });
+        
+        if (sections.length > 0) {
+            sections[0].style.opacity = '1';
+            sections[0].style.transform = 'translateY(0)';
+        }
+    </script>
+</body>
+</html>
