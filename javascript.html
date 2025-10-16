@@ -1,0 +1,2006 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Basics - Complete Lesson by Patrick Porcuna</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.7;
+            color: #1a202c;
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            padding: 20px 0;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        
+        .lesson-nav {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            padding: 30px 40px;
+            text-align: center;
+            border-top: 3px solid #059669;
+        }
+        
+        .lesson-nav h3 {
+            color: white;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .lesson-nav-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .lesson-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: white;
+            color: #1e293b;
+            padding: 18px 35px;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 700;
+            transition: all 0.3s;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 1em;
+            border: 3px solid transparent;
+        }
+        
+        .lesson-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            border-color: #1e293b;
+        }
+        
+        .lesson-btn.prev {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+        
+        .lesson-btn.prev:hover {
+            border-color: white;
+        }
+        
+        .lesson-btn.disabled {
+            background: #e2e8f0;
+            color: #94a3b8;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+        
+        .lesson-btn.disabled:hover {
+            transform: none;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            border-color: transparent;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 0;
+            }
+            
+            .lesson-nav-buttons {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .lesson-btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            header h1 {
+                font-size: 2.5em !important;
+            }
+            
+            .container {
+                border-radius: 0;
+            }
+        }
+        
+        header {
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            color: white;
+            padding: 80px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: pulse 15s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        header h1 {
+            font-size: 4em;
+            margin-bottom: 15px;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+            position: relative;
+            z-index: 1;
+        }
+        
+        header .subtitle {
+            font-size: 1.5em;
+            opacity: 0.95;
+            margin-top: 10px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        nav {
+            background: #2d3748;
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        nav li {
+            margin: 0;
+        }
+        
+        nav a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 18px 24px;
+            font-weight: 600;
+            transition: all 0.3s;
+            border-bottom: 3px solid transparent;
+        }
+        
+        nav a:hover, nav a.active {
+            background: #fbbf24;
+            border-bottom-color: #f59e0b;
+        }
+        
+        main {
+            padding: 60px 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        section {
+            margin-bottom: 80px;
+            scroll-margin-top: 80px;
+        }
+        
+        h2 {
+            color: #f59e0b;
+            font-size: 2.8em;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 4px solid #f59e0b;
+            position: relative;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 100px;
+            height: 4px;
+            background: #fbbf24;
+        }
+        
+        h3 {
+            color: #f59e0b;
+            font-size: 2em;
+            margin: 35px 0 20px;
+        }
+        
+        h4 {
+            color: #2d3748;
+            font-size: 1.4em;
+            margin: 25px 0 15px;
+        }
+        
+        p {
+            margin: 15px 0;
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+        
+        ul, ol {
+            margin: 20px 0;
+            padding-left: 40px;
+        }
+        
+        li {
+            margin: 12px 0;
+            font-size: 1.05em;
+            line-height: 1.7;
+        }
+        
+        .hero-box {
+            background: linear-gradient(135deg, #fef3c715 0%, #fbbf2415 100%);
+            padding: 40px;
+            border-radius: 12px;
+            border-left: 6px solid #f59e0b;
+            margin: 30px 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+        
+        .info-box {
+            background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+            border-left: 6px solid #0891b2;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .warning-box {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border-left: 6px solid #f59e0b;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .success-box {
+            background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+            border-left: 6px solid #10b981;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .danger-box {
+            background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+            border-left: 6px solid #ef4444;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        pre {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 25px;
+            border-radius: 10px;
+            overflow-x: auto;
+            margin: 25px 0;
+            border: 3px solid #475569;
+            position: relative;
+            font-size: 0.95em;
+            line-height: 1.6;
+        }
+        
+        code {
+            font-family: 'Courier New', 'Monaco', 'Consolas', monospace;
+        }
+        
+        .inline-code {
+            background: #f1f5f9;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            color: #e11d48;
+            font-size: 0.95em;
+            border: 1px solid #e2e8f0;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        th, td {
+            padding: 18px;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        th {
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            color: white;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.9em;
+            letter-spacing: 0.5px;
+        }
+        
+        tr:nth-child(even) {
+            background: #f8fafc;
+        }
+        
+        tr:hover {
+            background: #fef3c7;
+            transition: background 0.3s;
+        }
+        
+        .demo-box {
+            border: 3px solid #e2e8f0;
+            padding: 30px;
+            margin: 25px 0;
+            border-radius: 10px;
+            background: #f8fafc;
+        }
+        
+        .demo-box h4 {
+            margin-top: 0;
+            color: #f59e0b;
+        }
+        
+        .comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin: 30px 0;
+        }
+        
+        .comparison-item {
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .comparison-bad {
+            background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+            border: 3px solid #ef4444;
+        }
+        
+        .comparison-good {
+            background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+            border: 3px solid #10b981;
+        }
+        
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin: 30px 0;
+        }
+        
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border-top: 4px solid #fbbf24;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+        
+        .activity-card {
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 12px;
+            margin: 40px 0;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .activity-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%);
+        }
+        
+        .activity-card h3 {
+            color: white;
+            margin-top: 0;
+            position: relative;
+        }
+        
+        .activity-card.purple {
+            background: linear-gradient(135deg, #a855f7 0%, #7c3aed 100%);
+        }
+        
+        .activity-card.green {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        }
+        
+        footer {
+            background: #1e293b;
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+        }
+        
+        footer a {
+            color: #93c5fd;
+            text-decoration: none;
+        }
+        
+        footer a:hover {
+            color: #60a5fa;
+            text-decoration: underline;
+        }
+        
+        .copy-btn {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: #fbbf24;
+            color: white;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85em;
+            font-weight: 600;
+            transition: all 0.3s;
+            z-index: 10;
+        }
+        
+        .copy-btn:hover {
+            background: #f59e0b;
+            transform: scale(1.05);
+        }
+        
+        @media (max-width: 1024px) {
+            .grid-3 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            main {
+                padding: 40px 20px;
+            }
+            
+            nav ul {
+                flex-direction: column;
+            }
+            
+            h2 {
+                font-size: 2em;
+            }
+            
+            .comparison, .grid-3 {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>⚡ JAVASCRIPT BASICS</h1>
+            <p class="subtitle">by Patrick Porcuna</p>
+            <p class="subtitle" style="font-size: 1.2em; margin-top: 20px;">Programming Fundamentals for the Web - Lesson 3</p>
+        </header>
+        
+        <!-- Lesson Navigation Section -->
+        <div class="lesson-nav">
+            <h3>📚 Navigate Your Learning Path</h3>
+            <div class="lesson-nav-buttons">
+                <a href="index.html" class="lesson-btn prev">
+                    <span>←</span>
+                    <span>HTML Basics</span>
+                    <span>🌐</span>
+                </a>
+                <a href="css.html" class="lesson-btn prev">
+                    <span>←</span>
+                    <span>CSS Basics</span>
+                    <span>🎨</span>
+                </a>
+                <a href="#" class="lesson-btn disabled" title="You are currently on this lesson">
+                    <span>⚡</span>
+                    <span>Current: JavaScript Basics</span>
+                </a>
+            </div>
+        </div>
+        
+        <nav>
+            <ul>
+                <li><a href="#objectives">📚 Objectives</a></li>
+                <li><a href="#what-is-js">💡 What is JS</a></li>
+                <li><a href="#setup">🔧 Setup</a></li>
+                <li><a href="#basics">📝 Basics</a></li>
+                <li><a href="#functions">⚙️ Functions</a></li>
+                <li><a href="#dom">🌳 DOM</a></li>
+                <li><a href="#events">🖱️ Events</a></li>
+                <li><a href="#activities">🎯 Activities</a></li>
+            </ul>
+        </nav>
+        
+        <main>
+            <!-- OBJECTIVES -->
+            <section id="objectives">
+                <h2>📚 Learning Objectives</h2>
+                <div class="hero-box">
+                    <h3 style="margin-top: 0; color: #f59e0b;">By the end of this lesson, you will be able to:</h3>
+                    <ul style="font-size: 1.15em; line-height: 2;">
+                        <li>✅ Understand what JavaScript is and its role in web development</li>
+                        <li>✅ Write and execute basic JavaScript code</li>
+                        <li>✅ Work with variables, data types, and operators</li>
+                        <li>✅ Create and use functions</li>
+                        <li>✅ Manipulate the DOM to change webpage content</li>
+                        <li>✅ Handle user events like clicks and inputs</li>
+                        <li>✅ Make your webpages interactive and dynamic</li>
+                        <li>✅ Debug JavaScript code using browser tools</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <!-- WHAT IS JAVASCRIPT -->
+            <section id="what-is-js">
+                <h2>🤔 What is JavaScript?</h2>
+                
+                <div class="info-box">
+                    <h3 style="margin-top: 0; color: #0891b2;">JavaScript = The Programming Language of the Web</h3>
+                    <p style="font-size: 1.15em;"><strong>JavaScript brings websites to life!</strong> While HTML provides structure and CSS adds style, JavaScript adds behavior and interactivity. It allows you to create dynamic content, respond to user actions, validate forms, create animations, and build complete web applications.</p>
+                    <p style="font-size: 1.1em; margin-top: 20px;">Think of JavaScript as the brain that makes decisions and controls how your webpage behaves!</p>
+                </div>
+                
+                <h3>🎯 The Perfect Team</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Technology</th>
+                            <th>Role</th>
+                            <th>JavaScript Makes It...</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>HTML</strong></td>
+                            <td>Structure & Content</td>
+                            <td>Dynamic - change content without reloading</td>
+                        </tr>
+                        <tr>
+                            <td><strong>CSS</strong></td>
+                            <td>Style & Design</td>
+                            <td>Interactive - animate and respond to users</td>
+                        </tr>
+                        <tr>
+                            <td><strong>JavaScript</strong></td>
+                            <td>Behavior & Logic</td>
+                            <td>Smart - make decisions and calculations</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <h3>✨ What Can JavaScript Do?</h3>
+                <div class="grid-3">
+                    <div class="card">
+                        <h4>🎮 Interactive Elements</h4>
+                        <p>Buttons, sliders, forms, dropdown menus that respond to user actions</p>
+                    </div>
+                    <div class="card">
+                        <h4>🎬 Animations</h4>
+                        <p>Smooth transitions, moving elements, and visual effects</p>
+                    </div>
+                    <div class="card">
+                        <h4>✅ Form Validation</h4>
+                        <p>Check user input before submitting forms</p>
+                    </div>
+                    <div class="card">
+                        <h4>🔄 Dynamic Content</h4>
+                        <p>Update page content without refreshing</p>
+                    </div>
+                    <div class="card">
+                        <h4>🎲 Games</h4>
+                        <p>Build interactive games directly in the browser</p>
+                    </div>
+                    <div class="card">
+                        <h4>📊 Data Processing</h4>
+                        <p>Calculate, sort, filter, and display data</p>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- SETUP -->
+            <section id="setup">
+                <h2>🔧 How to Add JavaScript to Your Webpage</h2>
+                
+                <h3>📝 Three Ways to Include JavaScript</h3>
+                
+                <h4>1. Inline JavaScript (Not Recommended)</h4>
+                <pre><code>&lt;button onclick="alert('Hello!')"&gt;Click Me&lt;/button&gt;</code></pre>
+                <div class="warning-box">
+                    <p><strong>⚠️ Avoid inline JavaScript!</strong> It mixes content with behavior and is hard to maintain.</p>
+                </div>
+                
+                <h4>2. Internal JavaScript (For Small Scripts)</h4>
+                <pre><code>&lt;head&gt;
+    &lt;script&gt;
+        console.log('Hello, World!');
+        
+        function greet() {
+            alert('Welcome to JavaScript!');
+        }
+    &lt;/script&gt;
+&lt;/head&gt;</code></pre>
+                
+                <h4>3. External JavaScript (Best Practice!) ✅</h4>
+                <pre><code>&lt;!-- In your HTML file, before closing &lt;/body&gt; tag --&gt;
+    &lt;script src="script.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+// In your script.js file
+console.log('Hello from external file!');
+
+function greet() {
+    alert('Welcome to JavaScript!');
+}</code></pre>
+                
+                <div class="success-box">
+                    <p><strong>✅ Best Practice:</strong> Use external JavaScript files! Place the <code>&lt;script&gt;</code> tag right before the closing <code>&lt;/body&gt;</code> tag so the HTML loads first.</p>
+                </div>
+                
+                <h3>🛠️ Browser Console</h3>
+                <div class="info-box">
+                    <h4>Your JavaScript Playground!</h4>
+                    <p style="font-size: 1.1em; margin-top: 15px;"><strong>How to Open:</strong></p>
+                    <ul style="line-height: 2; margin-top: 10px;">
+                        <li><strong>Windows/Linux:</strong> Press <code>F12</code> or <code>Ctrl + Shift + J</code></li>
+                        <li><strong>Mac:</strong> Press <code>Cmd + Option + J</code></li>
+                        <li><strong>Any Browser:</strong> Right-click → Inspect → Console tab</li>
+                    </ul>
+                    <p style="margin-top: 15px;"><strong>Try typing:</strong> <code>console.log('Hello, World!')</code></p>
+                </div>
+            </section>
+            
+            <!-- BASICS -->
+            <section id="basics">
+                <h2>📝 JavaScript Basics</h2>
+                
+                <h3>💬 Comments</h3>
+                <pre><code>// This is a single-line comment
+
+/*
+   This is a
+   multi-line comment
+*/
+
+console.log('Hello'); // Comments can go after code too</code></pre>
+                
+                <h3>📦 Variables</h3>
+                <p>Variables store data that you can use and change later. Think of them as labeled boxes that hold information.</p>
+                
+                <h4>Three Ways to Declare Variables:</h4>
+                <pre><code>// let - can be reassigned (most common)
+let name = 'John';
+let age = 25;
+name = 'Jane'; // ✅ This works!
+
+// const - cannot be reassigned (use for constants)
+const PI = 3.14159;
+const birthYear = 2000;
+// PI = 3.14; // ❌ Error! Cannot reassign const
+
+// var - old way (avoid using in modern code)
+var oldVariable = 'outdated';</code></pre>
+                
+                <div class="success-box">
+                    <h4>✅ Best Practices:</h4>
+                    <ul style="line-height: 2;">
+                        <li>Use <strong>const</strong> by default</li>
+                        <li>Use <strong>let</strong> when you need to reassign</li>
+                        <li>Avoid <strong>var</strong> in modern JavaScript</li>
+                        <li>Use descriptive names: <code>userName</code> not <code>x</code></li>
+                        <li>Use camelCase: <code>firstName</code>, <code>totalPrice</code></li>
+                    </ul>
+                </div>
+                
+                <h3>🏷️ Data Types</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Description</th>
+                            <th>Example</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>String</code></td>
+                            <td>Text data</td>
+                            <td><code>'Hello'</code>, <code>"World"</code>, <code>`Template`</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>Number</code></td>
+                            <td>Integers and decimals</td>
+                            <td><code>42</code>, <code>3.14</code>, <code>-7</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>Boolean</code></td>
+                            <td>True or false</td>
+                            <td><code>true</code>, <code>false</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>Array</code></td>
+                            <td>List of values</td>
+                            <td><code>[1, 2, 3]</code>, <code>['a', 'b']</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>Object</code></td>
+                            <td>Collection of properties</td>
+                            <td><code>{name: 'John', age: 25}</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>null</code></td>
+                            <td>Intentionally empty</td>
+                            <td><code>null</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>undefined</code></td>
+                            <td>Not yet assigned</td>
+                            <td><code>undefined</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <h4>Examples:</h4>
+                <pre><code>// Strings
+let firstName = 'Alice';
+let lastName = "Smith";
+let message = `Hello, ${firstName}!`; // Template literal
+
+// Numbers
+let age = 25;
+let price = 19.99;
+let temperature = -5;
+
+// Booleans
+let isStudent = true;
+let hasGraduated = false;
+
+// Arrays
+let colors = ['red', 'green', 'blue'];
+let numbers = [1, 2, 3, 4, 5];
+
+// Objects
+let person = {
+    name: 'John',
+    age: 30,
+    isStudent: false
+};
+
+// Accessing data
+console.log(colors[0]); // 'red'
+console.log(person.name); // 'John'</code></pre>
+                
+                <h3>➕ Operators</h3>
+                
+                <h4>Arithmetic Operators:</h4>
+                <pre><code>let a = 10;
+let b = 3;
+
+console.log(a + b);  // 13 (addition)
+console.log(a - b);  // 7  (subtraction)
+console.log(a * b);  // 30 (multiplication)
+console.log(a / b);  // 3.333... (division)
+console.log(a % b);  // 1  (remainder/modulo)
+console.log(a ** b); // 1000 (exponentiation)</code></pre>
+                
+                <h4>Comparison Operators:</h4>
+                <pre><code>let x = 5;
+
+console.log(x == 5);   // true  (equal value)
+console.log(x === 5);  // true  (equal value and type)
+console.log(x != 3);   // true  (not equal value)
+console.log(x !== '5'); // true  (not equal value or type)
+console.log(x > 3);    // true  (greater than)
+console.log(x < 10);   // true  (less than)
+console.log(x >= 5);   // true  (greater than or equal)
+console.log(x <= 5);   // true  (less than or equal)</code></pre>
+                
+                <div class="warning-box">
+                    <p><strong>⚠️ Use === instead of ==</strong></p>
+                    <p>The <code>===</code> operator checks both value AND type, while <code>==</code> only checks value.</p>
+                    <pre style="background: white; color: #1e293b; margin-top: 15px;"><code>5 == '5'   // true  (converts string to number)
+5 === '5'  // false (different types)</code></pre>
+                </div>
+                
+                <h4>Logical Operators:</h4>
+                <pre><code>let age = 25;
+let hasLicense = true;
+
+// AND (&&) - both must be true
+console.log(age >= 18 && hasLicense); // true
+
+// OR (||) - at least one must be true
+console.log(age < 18 || hasLicense); // true
+
+// NOT (!) - reverses boolean
+console.log(!hasLicense); // false</code></pre>
+                
+                <h3>🔀 Conditionals (If/Else)</h3>
+                <pre><code>let score = 85;
+
+if (score >= 90) {
+    console.log('Grade: A');
+} else if (score >= 80) {
+    console.log('Grade: B');
+} else if (score >= 70) {
+    console.log('Grade: C');
+} else {
+    console.log('Grade: F');
+}
+
+// Ternary operator (shorthand)
+let status = score >= 60 ? 'Pass' : 'Fail';
+console.log(status); // 'Pass'</code></pre>
+                
+                <h3>🔁 Loops</h3>
+                
+                <h4>For Loop:</h4>
+                <pre><code>// Count from 1 to 5
+for (let i = 1; i <= 5; i++) {
+    console.log(i);
+}
+// Output: 1, 2, 3, 4, 5
+
+// Loop through an array
+let fruits = ['apple', 'banana', 'orange'];
+for (let i = 0; i < fruits.length; i++) {
+    console.log(fruits[i]);
+}</code></pre>
+                
+                <h4>While Loop:</h4>
+                <pre><code>let count = 1;
+
+while (count <= 5) {
+    console.log(count);
+    count++;
+}
+// Output: 1, 2, 3, 4, 5</code></pre>
+                
+                <h4>For...of Loop (Modern way for arrays):</h4>
+                <pre><code>let colors = ['red', 'green', 'blue'];
+
+for (let color of colors) {
+    console.log(color);
+}
+// Output: red, green, blue</code></pre>
+            </section>
+            
+            <!-- FUNCTIONS -->
+            <section id="functions">
+                <h2>⚙️ Functions</h2>
+                
+                <div class="info-box">
+                    <p style="font-size: 1.15em;"><strong>Functions are reusable blocks of code</strong> that perform specific tasks. Think of them as recipes you can use over and over again!</p>
+                </div>
+                
+                <h3>📝 Function Declaration</h3>
+                <pre><code>// Define a function
+function greet() {
+    console.log('Hello, World!');
+}
+
+// Call the function
+greet(); // Output: Hello, World!
+
+// Function with parameters
+function greetPerson(name) {
+    console.log('Hello, ' + name + '!');
+}
+
+greetPerson('Alice'); // Output: Hello, Alice!
+greetPerson('Bob');   // Output: Hello, Bob!
+
+// Function with return value
+function add(a, b) {
+    return a + b;
+}
+
+let sum = add(5, 3);
+console.log(sum); // 8</code></pre>
+                
+                <h3>🎯 Arrow Functions (Modern Syntax)</h3>
+                <pre><code>// Traditional function
+function multiply(a, b) {
+    return a * b;
+}
+
+// Arrow function (shorter syntax)
+const multiply = (a, b) => {
+    return a * b;
+};
+
+// Even shorter (when one line)
+const multiply = (a, b) => a * b;
+
+// Single parameter (no parentheses needed)
+const square = x => x * x;
+
+console.log(square(5)); // 25</code></pre>
+                
+                <h3>🔄 Example: Real-World Functions</h3>
+                <pre><code>// Calculate age from birth year
+function calculateAge(birthYear) {
+    const currentYear = new Date().getFullYear();
+    return currentYear - birthYear;
+}
+
+console.log(calculateAge(2000)); // e.g., 25
+
+// Check if number is even
+function isEven(number) {
+    return number % 2 === 0;
+}
+
+console.log(isEven(4));  // true
+console.log(isEven(7));  // false
+
+// Generate greeting based on time
+function getGreeting() {
+    const hour = new Date().getHours();
+    
+    if (hour < 12) {
+        return 'Good morning!';
+    } else if (hour < 18) {
+        return 'Good afternoon!';
+    } else {
+        return 'Good evening!';
+    }
+}
+
+console.log(getGreeting());</code></pre>
+            </section>
+            
+            <!-- DOM MANIPULATION -->
+            <section id="dom">
+                <h2>🌳 DOM Manipulation</h2>
+                
+                <div class="info-box">
+                    <h3 style="margin-top: 0; color: #0891b2;">The Document Object Model (DOM)</h3>
+                    <p style="font-size: 1.1em;">The DOM is a programming interface that represents your HTML as a tree of objects. JavaScript can access and modify this tree to change your webpage dynamically!</p>
+                </div>
+                
+                <h3>🎯 Selecting Elements</h3>
+                <pre><code>// Get element by ID
+const header = document.getElementById('main-header');
+
+// Get elements by class name (returns collection)
+const buttons = document.getElementsByClassName('btn');
+
+// Get elements by tag name
+const paragraphs = document.getElementsByTagName('p');
+
+// Modern selectors (recommended!)
+const header = document.querySelector('#main-header');
+const firstButton = document.querySelector('.btn'); // First match
+const allButtons = document.querySelectorAll('.btn'); // All matches</code></pre>
+                
+                <h3>✏️ Changing Content</h3>
+                <pre><code>// Change text content
+const heading = document.querySelector('h1');
+heading.textContent = 'New Heading!';
+
+// Change HTML content
+const div = document.querySelector('#content');
+div.innerHTML = '&lt;p&gt;New paragraph&lt;/p&gt;';
+
+// Change attributes
+const image = document.querySelector('img');
+image.src = 'new-image.jpg';
+image.alt = 'New description';
+
+// Change styles
+const box = document.querySelector('.box');
+box.style.backgroundColor = 'blue';
+box.style.color = 'white';
+box.style.padding = '20px';</code></pre>
+                
+                <h3>➕ Creating and Adding Elements</h3>
+                <pre><code>// Create a new element
+const newParagraph = document.createElement('p');
+newParagraph.textContent = 'This is a new paragraph';
+
+// Add it to the page
+const container = document.querySelector('#container');
+container.appendChild(newParagraph);
+
+// Create a button with class
+const button = document.createElement('button');
+button.textContent = 'Click Me';
+button.className = 'btn btn-primary';
+container.appendChild(button);</code></pre>
+                
+                <h3>🗑️ Removing Elements</h3>
+                <pre><code>// Remove an element
+const element = document.querySelector('.to-remove');
+element.remove();
+
+// Remove child element
+const parent = document.querySelector('#parent');
+const child = document.querySelector('.child');
+parent.removeChild(child);</code></pre>
+                
+                <h3>🎨 Working with Classes</h3>
+                <pre><code>const element = document.querySelector('.box');
+
+// Add a class
+element.classList.add('active');
+
+// Remove a class
+element.classList.remove('hidden');
+
+// Toggle a class (add if not there, remove if there)
+element.classList.toggle('highlight');
+
+// Check if has class
+if (element.classList.contains('active')) {
+    console.log('Element is active!');
+}</code></pre>
+                
+                <h3>🔍 Complete Example</h3>
+                <pre><code>// HTML
+// &lt;div id="app"&gt;
+//     &lt;h1 id="title"&gt;Original Title&lt;/h1&gt;
+//     &lt;button id="changeBtn"&gt;Change Title&lt;/button&gt;
+// &lt;/div&gt;
+
+// JavaScript
+const title = document.querySelector('#title');
+const button = document.querySelector('#changeBtn');
+
+// Change title text
+title.textContent = 'JavaScript is Awesome!';
+
+// Change title style
+title.style.color = '#f59e0b';
+title.style.fontSize = '2em';
+
+// Add a new paragraph
+const newPara = document.createElement('p');
+newPara.textContent = 'This was added with JavaScript!';
+newPara.style.color = 'green';
+
+const app = document.querySelector('#app');
+app.appendChild(newPara);</code></pre>
+            </section>
+            
+            <!-- EVENTS -->
+            <section id="events">
+                <h2>🖱️ Event Handling</h2>
+                
+                <div class="info-box">
+                    <p style="font-size: 1.15em;"><strong>Events are actions that happen in the browser</strong> - clicks, key presses, mouse movements, form submissions, etc. JavaScript can "listen" for these events and respond to them!</p>
+                </div>
+                
+                <h3>🎯 Common Events</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Event</th>
+                            <th>When It Happens</th>
+                            <th>Example Use</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>click</code></td>
+                            <td>Element is clicked</td>
+                            <td>Button clicks, menu items</td>
+                        </tr>
+                        <tr>
+                            <td><code>dblclick</code></td>
+                            <td>Element is double-clicked</td>
+                            <td>Edit mode, expand items</td>
+                        </tr>
+                        <tr>
+                            <td><code>mouseover</code></td>
+                            <td>Mouse enters element</td>
+                            <td>Show tooltips, highlights</td>
+                        </tr>
+                        <tr>
+                            <td><code>mouseout</code></td>
+                            <td>Mouse leaves element</td>
+                            <td>Hide tooltips</td>
+                        </tr>
+                        <tr>
+                            <td><code>keydown</code></td>
+                            <td>Key is pressed</td>
+                            <td>Keyboard shortcuts</td>
+                        </tr>
+                        <tr>
+                            <td><code>keyup</code></td>
+                            <td>Key is released</td>
+                            <td>Search as you type</td>
+                        </tr>
+                        <tr>
+                            <td><code>submit</code></td>
+                            <td>Form is submitted</td>
+                            <td>Form validation</td>
+                        </tr>
+                        <tr>
+                            <td><code>input</code></td>
+                            <td>Input value changes</td>
+                            <td>Live validation, counters</td>
+                        </tr>
+                        <tr>
+                            <td><code>change</code></td>
+                            <td>Input loses focus after change</td>
+                            <td>Select dropdowns</td>
+                        </tr>
+                        <tr>
+                            <td><code>load</code></td>
+                            <td>Page finishes loading</td>
+                            <td>Initialize app</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <h3>📝 Adding Event Listeners</h3>
+                <pre><code>// Get the element
+const button = document.querySelector('#myButton');
+
+// Add event listener
+button.addEventListener('click', function() {
+    alert('Button was clicked!');
+});
+
+// Using arrow function
+button.addEventListener('click', () => {
+    alert('Button was clicked!');
+});
+
+// Named function (reusable)
+function handleClick() {
+    alert('Button was clicked!');
+}
+
+button.addEventListener('click', handleClick);</code></pre>
+                
+                <h3>🎯 Click Event Examples</h3>
+                <pre><code>// Change text on click
+const heading = document.querySelector('h1');
+const button = document.querySelector('#changeBtn');
+
+button.addEventListener('click', () => {
+    heading.textContent = 'Text Changed!';
+});
+
+// Toggle visibility
+const toggleBtn = document.querySelector('#toggleBtn');
+const content = document.querySelector('#content');
+
+toggleBtn.addEventListener('click', () => {
+    content.classList.toggle('hidden');
+});
+
+// Counter example
+let count = 0;
+const counterDisplay = document.querySelector('#counter');
+const incrementBtn = document.querySelector('#increment');
+
+incrementBtn.addEventListener('click', () => {
+    count++;
+    counterDisplay.textContent = count;
+});</code></pre>
+                
+                <h3>⌨️ Keyboard Events</h3>
+                <pre><code>// Listen for any key press
+document.addEventListener('keydown', (event) => {
+    console.log('Key pressed:', event.key);
+});
+
+// Listen for specific key
+document.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') {
+        console.log('Enter key pressed!');
+    }
+});
+
+// Input field validation
+const input = document.querySelector('#username');
+
+input.addEventListener('input', (event) => {
+    const value = event.target.value;
+    console.log('Current value:', value);
+    
+    if (value.length < 3) {
+        input.style.borderColor = 'red';
+    } else {
+        input.style.borderColor = 'green';
+    }
+});</code></pre>
+                
+                <h3>🖱️ Mouse Events</h3>
+                <pre><code>const box = document.querySelector('.box');
+
+// Mouse enters
+box.addEventListener('mouseover', () => {
+    box.style.backgroundColor = 'yellow';
+});
+
+// Mouse leaves
+box.addEventListener('mouseout', () => {
+    box.style.backgroundColor = 'white';
+});
+
+// Double click
+box.addEventListener('dblclick', () => {
+    alert('Double clicked!');
+});</code></pre>
+                
+                <h3>📝 Form Events</h3>
+                <pre><code>const form = document.querySelector('#myForm');
+
+form.addEventListener('submit', (event) => {
+    // Prevent page reload
+    event.preventDefault();
+    
+    // Get form data
+    const name = document.querySelector('#name').value;
+    const email = document.querySelector('#email').value;
+    
+    // Validate
+    if (name === '' || email === '') {
+        alert('Please fill in all fields!');
+        return;
+    }
+    
+    // Process form
+    console.log('Name:', name);
+    console.log('Email:', email);
+    
+    alert('Form submitted successfully!');
+});</code></pre>
+                
+                <h3>🎨 Complete Interactive Example</h3>
+                <pre><code>// HTML
+// &lt;div id="app"&gt;
+//     &lt;h1 id="title"&gt;Color Changer&lt;/h1&gt;
+//     &lt;button id="redBtn"&gt;Red&lt;/button&gt;
+//     &lt;button id="blueBtn"&gt;Blue&lt;/button&gt;
+//     &lt;button id="greenBtn"&gt;Green&lt;/button&gt;
+//     &lt;div id="box" style="width:200px; height:200px; border:2px solid black;"&gt;&lt;/div&gt;
+// &lt;/div&gt;
+
+// JavaScript
+const box = document.querySelector('#box');
+const redBtn = document.querySelector('#redBtn');
+const blueBtn = document.querySelector('#blueBtn');
+const greenBtn = document.querySelector('#greenBtn');
+
+redBtn.addEventListener('click', () => {
+    box.style.backgroundColor = 'red';
+});
+
+blueBtn.addEventListener('click', () => {
+    box.style.backgroundColor = 'blue';
+});
+
+greenBtn.addEventListener('click', () => {
+    box.style.backgroundColor = 'green';
+});</code></pre>
+            </section>
+            
+            <!-- PRACTICAL EXAMPLES -->
+            <section id="examples">
+                <h2>💡 Practical Examples</h2>
+                
+                <h3>Example 1: Simple Calculator</h3>
+                <pre><code>// HTML
+// &lt;input type="number" id="num1" placeholder="First number"&gt;
+// &lt;input type="number" id="num2" placeholder="Second number"&gt;
+// &lt;button id="addBtn"&gt;Add&lt;/button&gt;
+// &lt;p id="result"&gt;&lt;/p&gt;
+
+const num1Input = document.querySelector('#num1');
+const num2Input = document.querySelector('#num2');
+const addBtn = document.querySelector('#addBtn');
+const result = document.querySelector('#result');
+
+addBtn.addEventListener('click', () => {
+    const num1 = parseFloat(num1Input.value);
+    const num2 = parseFloat(num2Input.value);
+    
+    if (isNaN(num1) || isNaN(num2)) {
+        result.textContent = 'Please enter valid numbers!';
+        result.style.color = 'red';
+    } else {
+        const sum = num1 + num2;
+        result.textContent = `Result: ${sum}`;
+        result.style.color = 'green';
+    }
+});</code></pre>
+                
+                <h3>Example 2: To-Do List</h3>
+                <pre><code>// HTML
+// &lt;input type="text" id="taskInput" placeholder="Enter a task"&gt;
+// &lt;button id="addTaskBtn"&gt;Add Task&lt;/button&gt;
+// &lt;ul id="taskList"&gt;&lt;/ul&gt;
+
+const taskInput = document.querySelector('#taskInput');
+const addTaskBtn = document.querySelector('#addTaskBtn');
+const taskList = document.querySelector('#taskList');
+
+addTaskBtn.addEventListener('click', () => {
+    const taskText = taskInput.value.trim();
+    
+    if (taskText === '') {
+        alert('Please enter a task!');
+        return;
+    }
+    
+    // Create list item
+    const li = document.createElement('li');
+    li.textContent = taskText;
+    
+    // Create delete button
+    const deleteBtn = document.createElement('button');
+    deleteBtn.textContent = 'Delete';
+    deleteBtn.addEventListener('click', () => {
+        li.remove();
+    });
+    
+    // Add button to list item
+    li.appendChild(deleteBtn);
+    
+    // Add list item to list
+    taskList.appendChild(li);
+    
+    // Clear input
+    taskInput.value = '';
+});</code></pre>
+                
+                <h3>Example 3: Dark Mode Toggle</h3>
+                <pre><code>// HTML
+// &lt;button id="themeToggle"&gt;Toggle Dark Mode&lt;/button&gt;
+
+// CSS
+// body.dark-mode {
+//     background-color: #1a202c;
+//     color: white;
+// }
+
+const toggleBtn = document.querySelector('#themeToggle');
+
+toggleBtn.addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode');
+    
+    if (document.body.classList.contains('dark-mode')) {
+        toggleBtn.textContent = 'Light Mode';
+    } else {
+        toggleBtn.textContent = 'Dark Mode';
+    }
+});</code></pre>
+                
+                <h3>Example 4: Form Validation</h3>
+                <pre><code>// HTML
+// &lt;form id="signupForm"&gt;
+//     &lt;input type="text" id="username" placeholder="Username"&gt;
+//     &lt;span id="usernameError"&gt;&lt;/span&gt;
+//     &lt;input type="email" id="email" placeholder="Email"&gt;
+//     &lt;span id="emailError"&gt;&lt;/span&gt;
+//     &lt;input type="password" id="password" placeholder="Password"&gt;
+//     &lt;span id="passwordError"&gt;&lt;/span&gt;
+//     &lt;button type="submit"&gt;Sign Up&lt;/button&gt;
+// &lt;/form&gt;
+
+const form = document.querySelector('#signupForm');
+const username = document.querySelector('#username');
+const email = document.querySelector('#email');
+const password = document.querySelector('#password');
+
+form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    
+    let isValid = true;
+    
+    // Validate username
+    if (username.value.length < 3) {
+        document.querySelector('#usernameError').textContent = 
+            'Username must be at least 3 characters';
+        isValid = false;
+    } else {
+        document.querySelector('#usernameError').textContent = '';
+    }
+    
+    // Validate email
+    if (!email.value.includes('@')) {
+        document.querySelector('#emailError').textContent = 
+            'Please enter a valid email';
+        isValid = false;
+    } else {
+        document.querySelector('#emailError').textContent = '';
+    }
+    
+    // Validate password
+    if (password.value.length < 6) {
+        document.querySelector('#passwordError').textContent = 
+            'Password must be at least 6 characters';
+        isValid = false;
+    } else {
+        document.querySelector('#passwordError').textContent = '';
+    }
+    
+    if (isValid) {
+        alert('Form submitted successfully!');
+        form.reset();
+    }
+});</code></pre>
+            </section>
+            
+            <!-- ACTIVITIES -->
+            <section id="activities">
+                <h2>🎯 JavaScript Activities & Projects</h2>
+                
+                <div class="activity-card">
+                    <h3>⚡ Activity 1: Interactive Greeting</h3>
+                    <p style="position: relative;"><strong>⏱️ Time:</strong> 20 minutes</p>
+                    <p style="font-size: 1.1em; margin: 15px 0; position: relative;"><strong>Task:</strong> Create a webpage that greets the user by name</p>
+                    
+                    <h4 style="color: white; position: relative;">📋 Requirements:</h4>
+                    <ul style="font-size: 1.05em; line-height: 2; position: relative;">
+                        <li>✅ HTML with an input field for name</li>
+                        <li>✅ A button that says "Greet Me"</li>
+                        <li>✅ Display area for the greeting</li>
+                        <li>✅ JavaScript that gets the name from input</li>
+                        <li>✅ Display personalized greeting when button clicked</li>
+                        <li>✅ Handle empty input (show error message)</li>
+                        <li>✅ Use external JavaScript file</li>
+                    </ul>
+                    
+                    <h4 style="color: white; margin-top: 25px; position: relative;">💡 Bonus Challenges:</h4>
+                    <ul style="line-height: 1.9; position: relative;">
+                        <li>🎯 Change greeting based on time of day</li>
+                        <li>🎯 Add animation when greeting appears</li>
+                        <li>🎯 Allow pressing Enter to submit</li>
+                    </ul>
+                </div>
+                
+                <div class="activity-card purple">
+                    <h3>🎨 Activity 2: Color Picker Tool</h3>
+                    <p style="position: relative;"><strong>⏱️ Time:</strong> 30 minutes</p>
+                    <p style="font-size: 1.1em; margin: 15px 0; position: relative;"><strong>Task:</strong> Build a tool that changes the background color</p>
+                    
+                    <h4 style="color: white; position: relative;">📋 Requirements:</h4>
+                    <ul style="font-size: 1.05em; line-height: 2; position: relative;">
+                        <li>✅ At least 5 color buttons</li>
+                        <li>✅ Each button changes page background color</li>
+                        <li>✅ Display current color name</li>
+                        <li>✅ Random color button</li>
+                        <li>✅ Reset button (back to original)</li>
+                        <li>✅ Use event listeners for all buttons</li>
+                        <li>✅ Smooth color transitions with CSS</li>
+                    </ul>
+                    
+                    <h4 style="color: white; margin-top: 25px; position: relative;">💡 Bonus Challenges:</h4>
+                    <ul style="line-height: 1.9; position: relative;">
+                        <li>🎯 Add RGB sliders to create custom colors</li>
+                        <li>🎯 Show hex color code</li>
+                        <li>🎯 Copy color code to clipboard button</li>
+                    </ul>
+                </div>
+                
+                <div class="activity-card green">
+                    <h3>✅ Homework: Simple To-Do List App</h3>
+                    <p style="position: relative;"><strong>📅 Due:</strong> Next class session</p>
+                    <p style="font-size: 1.1em; margin: 15px 0; position: relative;"><strong>Task:</strong> Create a fully functional to-do list application</p>
+                    
+                    <h4 style="color: white; position: relative;">📋 Requirements:</h4>
+                    <ul style="font-size: 1.05em; line-height: 2; position: relative;">
+                        <li>✅ Input field to enter tasks</li>
+                        <li>✅ Add button to create new tasks</li>
+                        <li>✅ Display list of all tasks</li>
+                        <li>✅ Delete button for each task</li>
+                        <li>✅ Mark tasks as complete (cross out or style change)</li>
+                        <li>✅ Clear all completed tasks button</li>
+                        <li>✅ Show total number of tasks</li>
+                        <li>✅ Empty input validation</li>
+                        <li>✅ Styled with CSS (make it look good!)</li>
+                        <li>✅ Use semantic HTML</li>
+                        <li>✅ Clean, commented JavaScript code</li>
+                    </ul>
+                    
+                    <h4 style="color: white; margin-top: 25px; position: relative;">🌟 Stretch Goals (Extra Credit):</h4>
+                    <ul style="line-height: 1.9; position: relative;">
+                        <li>🎯 Edit tasks after creating them</li>
+                        <li>🎯 Priority levels (high, medium, low) with colors</li>
+                        <li>🎯 Filter tasks (all, active, completed)</li>
+                        <li>🎯 Due dates for tasks</li>
+                        <li>🎯 Save tasks to localStorage (persist on reload)</li>
+                        <li>🎯 Drag and drop to reorder tasks</li>
+                    </ul>
+                    
+                    <h4 style="color: white; margin-top: 25px; position: relative;">🏆 Grading Rubric (100 points):</h4>
+                    <table style="width: 100%; margin-top: 20px; background: white; color: #1a202c; position: relative;">
+                        <thead>
+                            <tr>
+                                <th>Category</th>
+                                <th>Points</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>HTML Structure</strong></td>
+                                <td>15</td>
+                                <td>Proper semantic HTML, organized</td>
+                            </tr>
+                            <tr>
+                                <td><strong>CSS Styling</strong></td>
+                                <td>20</td>
+                                <td>Professional appearance, good UX</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Core Functionality</strong></td>
+                                <td>35</td>
+                                <td>Add, delete, complete tasks work correctly</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Code Quality</strong></td>
+                                <td>20</td>
+                                <td>Clean code, comments, best practices</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Extra Features</strong></td>
+                                <td>10</td>
+                                <td>Going beyond requirements, creativity</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+            
+            <!-- DEBUGGING -->
+            <section id="debugging">
+                <h2>🔍 Debugging JavaScript</h2>
+                
+                <h3>🛠️ Common Errors</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Error Type</th>
+                            <th>What It Means</th>
+                            <th>How to Fix</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>SyntaxError</code></td>
+                            <td>Invalid JavaScript syntax</td>
+                            <td>Check for missing brackets, quotes, semicolons</td>
+                        </tr>
+                        <tr>
+                            <td><code>ReferenceError</code></td>
+                            <td>Variable doesn't exist</td>
+                            <td>Check variable names, make sure it's declared</td>
+                        </tr>
+                        <tr>
+                            <td><code>TypeError</code></td>
+                            <td>Wrong data type used</td>
+                            <td>Check what type of value you're using</td>
+                        </tr>
+                        <tr>
+                            <td><code>Undefined</code></td>
+                            <td>Variable has no value</td>
+                            <td>Initialize variable or check if element exists</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <h3>🔧 Debugging Tools</h3>
+                <div class="success-box">
+                    <h4>Console Methods:</h4>
+                    <pre style="background: white; color: #1e293b; margin-top: 15px;"><code>// Display values
+console.log('Hello');
+console.log('Value:', myVariable);
+
+// Display warnings
+console.warn('This is a warning!');
+
+// Display errors
+console.error('This is an error!');
+
+// Display objects nicely
+console.table([{name: 'Alice', age: 25}, {name: 'Bob', age: 30}]);
+
+// Group related logs
+console.group('User Info');
+console.log('Name: John');
+console.log('Age: 25');
+console.groupEnd();</code></pre>
+                </div>
+                
+                <h3>💡 Debugging Tips</h3>
+                <ul style="font-size: 1.05em; line-height: 2;">
+                    <li>🔍 Use <code>console.log()</code> to check values</li>
+                    <li>🔍 Check browser console for error messages</li>
+                    <li>🔍 Use browser DevTools debugger (set breakpoints)</li>
+                    <li>🔍 Check if elements exist before using them</li>
+                    <li>🔍 Verify script is loaded (check Network tab)</li>
+                    <li>🔍 Make sure script tag is before closing body tag</li>
+                    <li>🔍 Check for typos in variable and function names</li>
+                    <li>🔍 Use strict mode: <code>'use strict';</code> at top of file</li>
+                </ul>
+            </section>
+            
+            <!-- BEST PRACTICES -->
+            <section id="best-practices">
+                <h2>✅ JavaScript Best Practices</h2>
+                
+                <div class="success-box">
+                    <h3 style="margin-top: 0;">📋 Coding Standards</h3>
+                    <ul style="font-size: 1.05em; line-height: 2;">
+                        <li>✅ Use <strong>const</strong> by default, <strong>let</strong> when reassigning</li>
+                        <li>✅ Use descriptive variable names: <code>userName</code> not <code>un</code></li>
+                        <li>✅ Use camelCase for variables: <code>myVariableName</code></li>
+                        <li>✅ Use PascalCase for classes: <code>MyClass</code></li>
+                        <li>✅ Use UPPER_CASE for constants: <code>MAX_SIZE</code></li>
+                        <li>✅ Add comments to explain complex code</li>
+                        <li>✅ Use === instead of ==</li>
+                        <li>✅ Always use semicolons</li>
+                        <li>✅ Keep functions small and focused</li>
+                        <li>✅ Use arrow functions for simple functions</li>
+                        <li>✅ Validate user input</li>
+                        <li>✅ Handle errors gracefully</li>
+                    </ul>
+                </div>
+                
+                <div class="comparison">
+                    <div class="comparison-item comparison-bad">
+                        <h4>❌ Bad Practice</h4>
+                        <pre style="background: white; color: #1e293b;"><code>var x = 5
+var y = 10
+
+function a(b) {
+  return b * 2
+}
+
+if (x == '5') {
+  console.log("yes")
+}</code></pre>
+                    </div>
+                    <div class="comparison-item comparison-good">
+                        <h4>✅ Good Practice</h4>
+                        <pre style="background: white; color: #1e293b;"><code>const multiplier = 5;
+const baseValue = 10;
+
+function doubleNumber(number) {
+    return number * 2;
+}
+
+if (multiplier === 5) {
+    console.log('Multiplier is 5');
+}</code></pre>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- RESOURCES -->
+            <section id="resources">
+                <h2>📚 JavaScript Resources</h2>
+                
+                <h3>🌐 Learning Resources</h3>
+                <div class="grid-3">
+                    <div class="card">
+                        <h4>MDN Web Docs</h4>
+                        <p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">developer.mozilla.org</a></p>
+                        <p>Comprehensive JavaScript documentation</p>
+                    </div>
+                    <div class="card">
+                        <h4>JavaScript.info</h4>
+                        <p><a href="https://javascript.info/" target="_blank">javascript.info</a></p>
+                        <p>Modern JavaScript tutorial</p>
+                    </div>
+                    <div class="card">
+                        <h4>freeCodeCamp</h4>
+                        <p><a href="https://www.freecodecamp.org/" target="_blank">freecodecamp.org</a></p>
+                        <p>Interactive JavaScript course</p>
+                    </div>
+                    <div class="card">
+                        <h4>Codecademy</h4>
+                        <p><a href="https://www.codecademy.com/learn/introduction-to-javascript" target="_blank">codecademy.com</a></p>
+                        <p>Hands-on JavaScript lessons</p>
+                    </div>
+                    <div class="card">
+                        <h4>JavaScript30</h4>
+                        <p><a href="https://javascript30.com/" target="_blank">javascript30.com</a></p>
+                        <p>30 projects in 30 days</p>
+                    </div>
+                    <div class="card">
+                        <h4>Eloquent JavaScript</h4>
+                        <p><a href="https://eloquentjavascript.net/" target="_blank">eloquentjavascript.net</a></p>
+                        <p>Free online book</p>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- CONCLUSION -->
+            <section id="conclusion">
+                <h2>🎉 You've Learned JavaScript Basics!</h2>
+                
+                <div class="success-box">
+                    <h3 style="margin-top: 0;">What You Now Know:</h3>
+                    <ul style="font-size: 1.1em; line-height: 2;">
+                        <li>✅ What JavaScript is and how it works with HTML/CSS</li>
+                        <li>✅ Variables, data types, and operators</li>
+                        <li>✅ Conditionals and loops</li>
+                        <li>✅ Functions and how to create reusable code</li>
+                        <li>✅ DOM manipulation to change webpage content</li>
+                        <li>✅ Event handling to respond to user actions</li>
+                        <li>✅ Debugging techniques and best practices</li>
+                        <li>✅ How to build interactive web applications</li>
+                    </ul>
+                </div>
+                
+                <h3>🚀 Next Steps in Your JavaScript Journey</h3>
+                <div class="grid-3">
+                    <div class="card">
+                        <h4>🎯 Practice Daily</h4>
+                        <p>Build small projects every day. The more you code, the better you get!</p>
+                    </div>
+                    <div class="card">
+                        <h4>🔧 Master the DOM</h4>
+                        <p>Get comfortable manipulating HTML elements with JavaScript.</p>
+                    </div>
+                    <div class="card">
+                        <h4>📚 Learn Array Methods</h4>
+                        <p>map(), filter(), reduce() - powerful tools for data manipulation.</p>
+                    </div>
+                    <div class="card">
+                        <h4>⚡ Async JavaScript</h4>
+                        <p>Learn Promises, async/await for handling asynchronous operations.</p>
+                    </div>
+                    <div class="card">
+                        <h4>🎨 Modern Frameworks</h4>
+                        <p>React, Vue, Angular - build complex applications faster.</p>
+                    </div>
+                    <div class="card">
+                        <h4>🌐 APIs & Fetch</h4>
+                        <p>Connect to external data sources and build dynamic apps.</p>
+                    </div>
+                </div>
+                
+                <h3 style="margin-top: 40px;">✅ Before You Go - Action Items:</h3>
+                <ul style="font-size: 1.1em; line-height: 2.2;">
+                    <li>✅ Complete Activity 1: Interactive Greeting</li>
+                    <li>✅ Complete Activity 2: Color Picker Tool</li>
+                    <li>✅ Start Homework: To-Do List App</li>
+                    <li>✅ Practice in browser console daily</li>
+                    <li>✅ Build at least one small project per week</li>
+                    <li>✅ Join JavaScript communities online</li>
+                    <li>✅ Read documentation regularly</li>
+                </ul>
+                
+                <div style="text-align: center; margin-top: 60px; padding: 50px; background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%); border-radius: 15px; color: white; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
+                    <h3 style="color: white; font-size: 2.5em; margin-bottom: 25px;">Keep Coding! ⚡✨</h3>
+                    <p style="font-size: 1.3em; line-height: 1.8;">JavaScript makes the web interactive and alive!</p>
+                    <p style="font-size: 1.1em; margin-top: 20px; opacity: 0.95;">Every interactive website you love was built with JavaScript.</p>
+                    <p style="font-size: 1.2em; margin-top: 25px; font-weight: 600;">You're now ready to build amazing things! 🚀</p>
+                </div>
+            </section>
+            
+            <!-- COMPLETE WEB DEV PATH -->
+            <section id="path">
+                <h2>🗺️ Your Complete Web Development Path</h2>
+                
+                <div class="hero-box">
+                    <h3 style="margin-top: 0; color: #f59e0b;">Congratulations on Completing the Fundamentals!</h3>
+                    <p style="font-size: 1.15em; line-height: 1.8;">You now have the three essential skills needed for web development:</p>
+                    <ul style="font-size: 1.1em; line-height: 2; margin-top: 20px;">
+                        <li>✅ <strong>HTML</strong> - Structure your content</li>
+                        <li>✅ <strong>CSS</strong> - Style and design</li>
+                        <li>✅ <strong>JavaScript</strong> - Add interactivity and behavior</li>
+                    </ul>
+                </div>
+                
+                <h3>🎯 Where to Go from Here</h3>
+                <div class="grid-3">
+                    <div class="card">
+                        <h4>🏗️ Build Projects</h4>
+                        <p><strong>Portfolio Site, Blog, Calculator, Weather App, Quiz Game</strong></p>
+                        <p style="margin-top: 10px;">Apply everything you've learned by building real projects.</p>
+                    </div>
+                    <div class="card">
+                        <h4>📱 Responsive Design</h4>
+                        <p><strong>Mobile-first, Flexbox, Grid, Media Queries</strong></p>
+                        <p style="margin-top: 10px;">Make your sites work perfectly on all devices.</p>
+                    </div>
+                    <div class="card">
+                        <h4>🎨 Advanced CSS</h4>
+                        <p><strong>Animations, Transitions, CSS Variables, Sass</strong></p>
+                        <p style="margin-top: 10px;">Create beautiful, animated user interfaces.</p>
+                    </div>
+                    <div class="card">
+                        <h4>⚡ Advanced JavaScript</h4>
+                        <p><strong>ES6+, Async/Await, APIs, Local Storage</strong></p>
+                        <p style="margin-top: 10px;">Master modern JavaScript features.</p>
+                    </div>
+                    <div class="card">
+                        <h4>🛠️ Developer Tools</h4>
+                        <p><strong>Git, GitHub, VS Code, Chrome DevTools</strong></p>
+                        <p style="margin-top: 10px;">Learn professional development tools.</p>
+                    </div>
+                    <div class="card">
+                        <h4>⚛️ Frameworks</h4>
+                        <p><strong>React, Vue, Node.js, Express</strong></p>
+                        <p style="margin-top: 10px;">Build complex applications faster.</p>
+                    </div>
+                </div>
+                
+                <div style="text-align: center; margin-top: 50px;">
+                    <a href="index.html" class="btn" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: inline-block; color: white; padding: 15px 35px; text-decoration: none; border-radius: 8px; font-weight: 700; margin: 12px 8px; box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);">📖 Review HTML Lesson</a>
+                    <a href="css.html" class="btn" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); display: inline-block; color: white; padding: 15px 35px; text-decoration: none; border-radius: 8px; font-weight: 700; margin: 12px 8px; box-shadow: 0 4px 12px rgba(240, 147, 251, 0.4);">🎨 Review CSS Lesson</a>
+                </div>
+            </section>
+        </main>
+        
+        <!-- Bottom Navigation -->
+        <div class="lesson-nav">
+            <h3>🎓 Review Previous Lessons</h3>
+            <div class="lesson-nav-buttons">
+                <a href="index.html" class="lesson-btn prev">
+                    <span>←</span>
+                    <span>Back to HTML Basics</span>
+                    <span>🌐</span>
+                </a>
+                <a href="css.html" class="lesson-btn prev">
+                    <span>←</span>
+                    <span>Back to CSS Basics</span>
+                    <span>🎨</span>
+                </a>
+            </div>
+        </div>
+        
+        <footer>
+            <div style="max-width: 1200px; margin: 0 auto;">
+                <h3 style="margin-bottom: 25px; font-size: 2em;">📞 Contact & Resources</h3>
+                <p style="font-size: 1.2em; margin: 15px 0;"><strong>Instructor:</strong> Patrick Porcuna</p>
+                
+                <h4 style="margin-top: 40px; margin-bottom: 20px; color: white;">⚡ Essential JavaScript Links:</h4>
+                <p style="margin: 12px 0;">
+                    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">MDN JavaScript</a> | 
+                    <a href="https://javascript.info/" target="_blank">JavaScript.info</a> | 
+                    <a href="https://www.freecodecamp.org/" target="_blank">freeCodeCamp</a> | 
+                    <a href="https://javascript30.com/" target="_blank">JavaScript30</a> | 
+                    <a href="https://eloquentjavascript.net/" target="_blank">Eloquent JavaScript</a>
+                </p>
+                
+                <h4 style="margin-top: 30px; margin-bottom: 15px; color: white;">🎯 Practice Sites:</h4>
+                <p style="margin: 12px 0;">
+                    <a href="https://www.codewars.com/" target="_blank">Codewars</a> | 
+                    <a href="https://leetcode.com/" target="_blank">LeetCode</a> | 
+                    <a href="https://exercism.org/" target="_blank">Exercism</a> | 
+                    <a href="https://www.hackerrank.com/" target="_blank">HackerRank</a>
+                </p>
+                
+                <div style="margin-top: 50px; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.3);">
+                    <p style="font-size: 1.05em; opacity: 0.9;">© 2025 JavaScript Basics Lesson. All rights reserved.</p>
+                    <p style="margin-top: 15px; font-size: 1.1em;">Made with 💛 for aspiring developers</p>
+                    <p style="margin-top: 10px; font-size: 1.2em; font-weight: 600;">Happy Coding! ⚡</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+        
+        // Copy buttons for code blocks
+        document.querySelectorAll('pre code').forEach((block) => {
+            const button = document.createElement('button');
+            button.textContent = '📋 Copy';
+            button.className = 'copy-btn';
+            block.parentElement.appendChild(button);
+            
+            button.addEventListener('click', async () => {
+                try {
+                    await navigator.clipboard.writeText(block.textContent);
+                    button.textContent = '✅ Copied!';
+                    setTimeout(() => button.textContent = '📋 Copy', 2000);
+                } catch (err) {
+                    button.textContent = '❌ Failed';
+                    setTimeout(() => button.textContent = '📋 Copy', 2000);
+                }
+            });
+        });
+        
+        // Active nav highlighting
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('nav a');
+        
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 100) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+        
+        // Fade-in animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        sections.forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(20px)';
+            section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(section);
+        });
+        
+        if (sections.length > 0) {
+            sections[0].style.opacity = '1';
+            sections[0].style.transform = 'translateY(0)';
+        }
+    </script>
+</body>
+</html>

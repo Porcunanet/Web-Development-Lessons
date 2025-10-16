@@ -69,6 +69,86 @@
             z-index: 1;
         }
         
+          .lesson-nav {
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            padding: 30px 40px;
+            text-align: center;
+            border-top: 3px solid #f59e0b;
+        }
+        
+        .lesson-nav h3 {
+            color: white;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .lesson-nav-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .lesson-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: white;
+            color: #1e293b;
+            padding: 18px 35px;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 700;
+            transition: all 0.3s;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 1em;
+            border: 3px solid transparent;
+        }
+        
+        .lesson-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            border-color: #1e293b;
+        }
+        
+        .lesson-btn.next {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+        
+        .lesson-btn.next:hover {
+            border-color: white;
+        }
+        
+        .lesson-btn.disabled {
+            background: #e2e8f0;
+            color: #94a3b8;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+        
+        .lesson-btn.disabled:hover {
+            transform: none;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            border-color: transparent;
+        }
+        
+        @media (max-width: 768px) {
+            .lesson-nav-buttons {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .lesson-btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+        
+
         nav {
             background: #2d3748;
             padding: 0;
@@ -604,6 +684,26 @@
             </ul>
         </nav>
         
+         <div class="lesson-nav">
+            <h3>📚 Continue Your Learning Journey</h3>
+            <div class="lesson-nav-buttons">
+                <a href="#" class="lesson-btn disabled" title="You are currently on this lesson">
+                    <span>📖</span>
+                    <span>Current: HTML Basics</span>
+                </a>
+                <a href="css.html" class="lesson-btn next">
+                    <span>🎨</span>
+                    <span>Next: CSS Basics</span>
+                    <span>→</span>
+                </a>
+                <a href="javascript.html" class="lesson-btn next">
+                    <span>⚡</span>
+                    <span>Coming Soon: JavaScript Basics</span>
+                    <span>→</span>
+                </a>
+            </div>
+        </div>
+
         <main>
             <!-- OBJECTIVES SECTION -->
             <section id="objectives">
